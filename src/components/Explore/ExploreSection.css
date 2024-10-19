@@ -1,12 +1,14 @@
 .explore-section {
   text-align: center;
-  padding: 40px 0;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #7c92a7, #8b8b93);
 }
 
 .explore-section h2 {
-  font-size: 36px;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: 40px;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-weight: 600;
 }
 
 .explore-grid {
@@ -14,32 +16,78 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .explore-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   text-align: center;
 }
 
 .explore-card img {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 10px;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
 }
 
-.explore-card p {
+.explore-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.explore-card .overlay p {
   font-size: 18px;
-  color: #333;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.explore-card:hover .overlay {
+  opacity: 1;
+}
+
+.explore-card:hover img {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+.explore-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.button-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2c3e50;
+  margin-top: 10px;
+  text-transform: uppercase;
 }
 
 .explore-footer-text {
-  margin-top: 30px;
-  font-size: 20px;
-  color: #333;
+  margin-top: 40px;
+  font-size: 18px;
+  color: #2c3e50;
   font-style: italic;
 }
 
@@ -54,19 +102,23 @@
 @media (max-width: 768px) {
   .explore-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 20px;
   }
 
-  .explore-card img {
-    width: 100px;
-    height: 100px;
+  .explore-card {
+    width: 160px;
+    height: 160px;
   }
 
   .explore-section h2 {
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .explore-footer-text {
+    font-size: 16px;
+  }
+
+  .explore-card .overlay p {
     font-size: 16px;
   }
 }

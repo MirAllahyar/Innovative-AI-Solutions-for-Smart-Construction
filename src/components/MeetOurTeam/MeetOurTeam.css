@@ -1,0 +1,55 @@
+.meet-our-team {
+    background-color: #292b2a;
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  .meet-our-team h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+  
+  .team-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .team-card {
+    max-width: 300px;
+    text-align: center;
+  }
+  
+  .team-card img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .team-card h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+  
+  .team-card p {
+    font-size: 16px;
+    color: #a3bfa0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .team-grid {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .team-card img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  
