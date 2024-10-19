@@ -1,0 +1,45 @@
+.explore-section {
+    text-align: center;
+    padding: 40px 0;
+  }
+  
+  .explore-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    justify-items: center;
+  }
+  
+  .explore-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .explore-card img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .explore-card p {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .explore-footer-text {
+    margin-top: 30px;
+    font-size: 20px;
+    color: #333;
+    font-style: italic;
+  }
+  

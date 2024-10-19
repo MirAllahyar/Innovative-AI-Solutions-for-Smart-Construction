@@ -1,0 +1,25 @@
+.footer {
+  background-color: #f5f7fa;
+  padding: 40px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-column p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.social-icons {
+  font-size: 24px;
+}
+
+.social-icons i {
+  margin-right: 15px;
+  cursor: pointer;
+}

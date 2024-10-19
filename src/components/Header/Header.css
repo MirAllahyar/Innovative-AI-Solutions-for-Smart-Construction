@@ -1,0 +1,104 @@
+.header {
+  background-color: #22262d;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  width: 50px; /* Adjust the size as needed */
+  height: 50px; /* Adjust the size as needed */
+  margin-right: 10px; /* Add space between logo and text */
+  border-radius: 50px;
+  transition: transform 0.3s ease-in-out; /* Add transition for logo scaling */
+}
+
+.logo a {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease-in-out; /* Add transition for text color */
+}
+
+/* Hover effect on logo and text */
+.logo:hover .logo-image {
+  transform: scale(1.2); /* Scale up the logo on hover */
+}
+
+.logo:hover a {
+  color: #3b7e60; /* Change the color of the text on hover */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.nav-links li {
+  margin-right: 20px;
+}
+
+.nav-links li a {
+  font-size: 16px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-links li a:hover {
+  color: #3b7e60;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.auth-buttons a {
+  margin-left: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.login-btn {
+  background-color: #c0aa55;
+  color: #fff;
+}
+
+.signup-btn {
+  background-color: #c0aa55;
+  color: #fff;
+}
+
+/* Hover effects for login and signup buttons */
+.login-btn:hover {
+  background-color: #3b7e60;
+  color: #fff;
+}
+
+.signup-btn:hover {
+  background-color: #3b7e60;
+  color: #fff;
+}
