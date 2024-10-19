@@ -1,5 +1,5 @@
 .hero-section {
-  background-image: url('D:\Riphah University\7\Final Year Project part 1\Development\smart-construction\src\assets\images\hero-image.jpg');
+  background-image: url('../../assets/images/hero-image.jpg');
   background-size: cover;
   background-position: center;
   height: 650px;
@@ -13,7 +13,6 @@
 .hero-content h1 {
   font-size: 36px;
   margin-bottom: 20px;
-  animation: fadeIn 1s ease-in;
 }
 
 .hero-btn {
@@ -23,15 +22,40 @@
   border: none;
   border-radius: 5px;
   font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .hero-btn:hover {
-  background-color:  #3b7e60;
+  background-color: #3b7e60;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-section {
+    height: 450px;
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .hero-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 350px;
+    background-position: top;
+  }
+
+  .hero-content h1 {
+    font-size: 24px;
+  }
+
+  .hero-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }

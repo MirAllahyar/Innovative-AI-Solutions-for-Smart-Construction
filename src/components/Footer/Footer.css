@@ -3,6 +3,13 @@
   padding: 40px;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap; /* Wrap content on smaller screens */
+}
+
+.footer-column {
+  margin-bottom: 20px;
+  flex: 1;
+  min-width: 150px;
 }
 
 .footer-column h3 {
@@ -22,4 +29,21 @@
 .social-icons i {
   margin-right: 15px;
   cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .footer {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .footer-column {
+    margin-bottom: 10px;
+  }
+
+  .social-icons i {
+    margin-right: 10px;
+    font-size: 20px;
+  }
 }

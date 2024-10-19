@@ -20,11 +20,11 @@
 }
 
 .logo-image {
-  width: 50px; /* Adjust the size as needed */
-  height: 50px; /* Adjust the size as needed */
-  margin-right: 10px; /* Add space between logo and text */
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
   border-radius: 50px;
-  transition: transform 0.3s ease-in-out; /* Add transition for logo scaling */
+  transition: transform 0.3s ease-in-out;
 }
 
 .logo a {
@@ -34,16 +34,10 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  transition: color 0.3s ease-in-out; /* Add transition for text color */
 }
 
-/* Hover effect on logo and text */
 .logo:hover .logo-image {
-  transform: scale(1.2); /* Scale up the logo on hover */
-}
-
-.logo:hover a {
-  color: #3b7e60; /* Change the color of the text on hover */
+  transform: scale(1.2);
 }
 
 .nav-links {
@@ -79,7 +73,6 @@
   border-radius: 20px;
   text-decoration: none;
   font-weight: bold;
-  transition: background-color 0.3s ease; /* Smooth hover transition */
 }
 
 .login-btn {
@@ -92,13 +85,34 @@
   color: #fff;
 }
 
-/* Hover effects for login and signup buttons */
-.login-btn:hover {
+.login-btn:hover, .signup-btn:hover {
   background-color: #3b7e60;
-  color: #fff;
 }
 
-.signup-btn:hover {
-  background-color: #3b7e60;
-  color: #fff;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: #22262d;
+    width: 100%;
+    display: none;
+  }
+
+  .nav .toggle-menu {
+    display: block;
+    cursor: pointer;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-links li a {
+    font-size: 14px;
+  }
 }

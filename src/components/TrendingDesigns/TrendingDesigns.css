@@ -32,3 +32,23 @@
   font-size: 18px;
   font-weight: bold;
 }
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .design-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .design-card img {
+    width: 200px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .design-card img {
+    width: 150px;
+    height: 120px;
+  }
+}
