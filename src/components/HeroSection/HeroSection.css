@@ -1,18 +1,24 @@
 .hero-section {
-  background-image: url('../../assets/images/hero-image.jpg');
-  background-size: cover;
-  background-position: center;
   height: 650px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1.5s ease-in-out; /* Smooth background transition */
+}
+
+.hero-content {
   text-align: center;
   color: white;
+  z-index: 2; /* Ensures content stays above the background */
 }
 
 .hero-content h1 {
   font-size: 36px;
   margin-bottom: 20px;
+  animation: none; /* Remove animation from text if desired */
 }
 
 .hero-btn {
@@ -22,40 +28,36 @@
   border: none;
   border-radius: 5px;
   font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .hero-btn:hover {
-  background-color: #3b7e60;
+  background-color: #444;
 }
 
-/* Responsive Styles */
-@media (max-width: 1024px) {
-  .hero-section {
-    height: 450px;
-  }
-
-  .hero-content h1 {
-    font-size: 28px;
-  }
-
-  .hero-btn {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
+/* You can add additional styles for the smoothness of transitions */
+/* Add smooth transition for images */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .hero-section {
-    height: 350px;
-    background-position: top;
-  }
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 1s ease-in-out; /* Smooth transition */
+}
 
-  .hero-content h1 {
-    font-size: 24px;
-  }
+.hero-image.active {
+  opacity: 1;
+}
 
-  .hero-btn {
-    font-size: 14px;
-    padding: 8px 16px;
-  }
+.hero-image.inactive {
+  opacity: 0;
 }

@@ -144,7 +144,6 @@
     background-color: #fff;
     color: #2f5f47;
   }
-  
   /* Responsive */
   @media (max-width: 768px) {
     .signup-box {

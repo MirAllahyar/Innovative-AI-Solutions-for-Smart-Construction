@@ -1,0 +1,48 @@
+.about-us {
+    padding: 40px;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+  }
+  
+  .about-us h1 {
+    font-size: 36px;
+    color: #22262d;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .about-us p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+  
+  .about-us .about-mission {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .about-us .about-mission h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .about-us .about-mission p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .about-us img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  

@@ -1,91 +1,79 @@
 .footer {
   background-color: #22262d;
-  padding: 40px;
-  position: relative; /* Added for relative positioning */
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap; /* Wrap content on smaller screens */
   color: white;
+  padding: 50px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
 }
 
 .footer-overlay {
-  position: relative; /* Ensure background image stays behind */
-  z-index: 1; /* Added to make sure content appears over background */
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
 }
 
 .footer-content {
   display: flex;
   justify-content: space-around;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2; /* Ensure content appears above the background */
+  flex-wrap: wrap;
 }
 
 .footer-column {
-  margin-bottom: 20px;
   flex: 1;
-  min-width: 150px;
-  color: white;
+  min-width: 200px;
+  margin-bottom: 20px;
 }
 
 .footer-column h3 {
-  font-size: 18px;
+  color: #c0aa55;
   margin-bottom: 15px;
+}
+
+.footer-column a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  margin: 5px 0;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
   color: #c0aa55;
 }
 
 .footer-column p {
-  font-size: 14px;
-  margin: 5px 0;
+  color: #bbb;
 }
 
 .social-icons {
-  font-size: 24px;
-  position: absolute; /* Added to position icons freely */
-  right: 20px; /* Adjust this value to place icons as needed */
-  bottom: 20px;
-  z-index: 3; /* Ensure the icons appear above everything */
+  display: flex;
+  gap: 15px;
 }
 
 .social-icons a {
   color: #c0aa55;
-  margin-right: 15px;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 24px;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-icons a:hover {
-  color: #fff;
+  color: white;
+  transform: scale(1.1);
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .footer {
-    padding: 20px;
-    text-align: center;
-  }
-
   .footer-content {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
   }
 
   .footer-column {
-    margin-bottom: 20px;
-  }
-
-  .social-icons {
-    position: relative; /* For mobile, reposition as needed */
-    bottom: 0;
-    right: 0;
-    text-align: center;
-    margin-top: 10px;
+    margin-bottom: 30px;
   }
 
   .social-icons a {
-    margin-right: 10px;
     font-size: 20px;
   }
 }

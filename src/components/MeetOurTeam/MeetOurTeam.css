@@ -39,7 +39,7 @@
     font-size: 16px;
     color: #a3bfa0;
   }
-  
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .team-grid {

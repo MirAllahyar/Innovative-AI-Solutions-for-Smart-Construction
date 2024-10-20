@@ -44,7 +44,7 @@
     font-weight: bold;
     margin-top: 5px;
   }
-  
+
   /* Responsive */
   @media (max-width: 768px) {
     .testimonial-grid {

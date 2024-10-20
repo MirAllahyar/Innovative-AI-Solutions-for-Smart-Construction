@@ -1,0 +1,183 @@
+/* Hero Section */
+.news-hero-section {
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .news-title {
+    color: white;
+    font-size: 42px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    animation: slideDown 1.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  /* News Section */
+  .news-content {
+    max-width: 1200px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 0 20px;
+  }
+  
+  .news-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures the button stays at the bottom */
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    background-color: white;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeUp 0.7s ease forwards;
+    animation-delay: var(--delay, 0s); /* Allows staggered animations */
+  }
+  
+  .news-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .news-item img {
+    width: 100%;
+    height: 180px; /* Fixed height for images */
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .news-details h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .news-details p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Read More Button */
+  .read-more-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5e57;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .read-more-btn:hover {
+    background-color: #ff7d72;
+    transform: translateY(-3px);
+  }
+  
+  /* Animation for the news item */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Staggered delay for news cards */
+  .news-item:nth-child(1) {
+    --delay: 0.2s;
+  }
+  .news-item:nth-child(2) {
+    --delay: 0.4s;
+  }
+  .news-item:nth-child(3) {
+    --delay: 0.6s;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 1024px) {
+    .news-content {
+      grid-template-columns: repeat(2, 1fr); /* 2 cards per row for tablets */
+    }
+  }
+  /* Mobile adjustments for screens smaller than 768px */
+@media (max-width: 768px) {
+    .hero-section {
+      height: 400px; /* Example: Adjust hero section height for mobile */
+    }
+  
+    .hero-title {
+      font-size: 28px; /* Reduce font size for better readability on mobile */
+    }
+  
+    .news-content {
+      grid-template-columns: 1fr; /* Switch to single-column layout on mobile */
+    }
+  
+    .read-more-btn {
+      font-size: 14px; /* Adjust button size for mobile */
+      padding: 8px 15px;
+    }
+  }
+  
+  /* Tablet adjustments for screens smaller than 1024px */
+  @media (max-width: 1024px) {
+    .news-content {
+      grid-template-columns: repeat(2, 1fr); /* Switch to two-column layout on tablet */
+    }
+  }
+  
+  
+  @media (max-width: 768px) {
+    .news-content {
+      grid-template-columns: 1fr; /* 1 card per row for mobile */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .news-item img {
+      height: 150px;
+    }
+  
+    .news-details h2 {
+      font-size: 20px;
+    }
+  
+    .news-details p {
+      font-size: 14px;
+    }
+  
+    .read-more-btn {
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+  }
+  

@@ -1,7 +1,7 @@
 .explore-section {
   text-align: center;
   padding: 60px 0;
-  background: linear-gradient(135deg, #7c92a7, #8b8b93);
+  background: linear-gradient(135deg, #7c92a7, #8b8b93); /* Gradient background for better visual */
 }
 
 .explore-section h2 {
