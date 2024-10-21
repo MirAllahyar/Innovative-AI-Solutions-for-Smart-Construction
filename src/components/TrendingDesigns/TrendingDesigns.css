@@ -16,6 +16,7 @@
 
 .design-list {
   display: flex;
+  
   justify-content: center;
   gap: 30px; /* Spacing between images */
   overflow-x: auto; /* Horizontal scroll to allow more images */
