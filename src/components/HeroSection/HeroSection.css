@@ -81,3 +81,8 @@
 .hero-image.inactive {
   opacity: 0;
 }
+
+/*------------responsive-----------*/
+@media(max-width: 1000px){
+  
+}

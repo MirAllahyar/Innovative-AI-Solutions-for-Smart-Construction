@@ -87,8 +87,9 @@
 .btn:hover {
   background-color: #3b7e60;
 }
-
-/* Responsive Styles */
+/*
+ Responsive Styles 
+ */
 @media (max-width: 768px) {
   .nav-links {
     flex-direction: column;
@@ -109,9 +110,25 @@
     margin: 10px 0;
   }
 }
-
-@media (max-width: 1024px) {
-  .nav-links li a {
-    font-size: 14px;
-  }
+  
+/*
+@media(max-width: 1024px){
+  
 }
+
+@media(max-width: 840px){
+  .nav{
+    padding: 15px 0;
+  }
+  .nav ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    width: 200px;
+    background-color: #c0aa55;
+    padding-top: 70px;
+    transition: 0.5s;
+  }
+}*/
