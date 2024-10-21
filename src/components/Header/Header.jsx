@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Make sure to use Link for routing
 import './Header.css';
 import logo from '../../assets/images/IMG-20241014-WA0010.jpg';
 
@@ -8,21 +7,32 @@ const Header = () => {
     <header className="header">
       <nav className="nav">
         <div className="logo">
-          <Link to="/">
+          <a href="/">
             <img src={logo} alt="Smart Construction Logo" className="logo-image" />
             Smart Construction
-          </Link>
+          </a>
         </div>
+        {/* Navigation Links */}
         <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/blogs">Blogs</Link></li>
-          <li><Link to="/news">News</Link></li>
-          <li><Link to="/service-provider">Service Provider</Link></li>
-          <li><Link to="/contractor-login">Contractor</Link></li> {/* Contractor Login Link */}
+          <li><a href="/">Home</a></li>
+          <li><a href="/blogs">Blogs</a></li>
+          <li><a href="/news">News</a></li> {/* News path */}
+          <li><a href="/service-provider">Service Provider</a></li>
+          <li><a href="/contractor-login">Contractor</a></li>
         </ul>
+        {/* Authentication Buttons */}
         <div className="auth-buttons">
-          <Link to="/login" className="login-btn">Login</Link>
-          <Link to="/signup" className="signup-btn">Signup</Link>
+          <a href="/login">
+            <button className='btn'>
+              Login
+            </button>
+          </a>
+          <a href="/signup">
+            <button className='btn'>
+              Signup
+            </button>
+          </a>
+
         </div>
       </nav>
     </header>

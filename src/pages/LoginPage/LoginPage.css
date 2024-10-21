@@ -151,7 +151,7 @@
     color: #2f5f47;
     cursor: pointer;
   }
-  
+
   /* Responsive */
   @media (max-width: 768px) {
     .login-box {
