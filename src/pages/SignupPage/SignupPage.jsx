@@ -1,97 +1,84 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './SignupPage.css'; // Make sure you have the CSS file
-import logo from '../../assets/images/IMG-20241014-WA0010.jpg'; // Your logo path
+import { useNavigate } from 'react-router-dom';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import './SignupPage.css';
 
 const SignupPage = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState(''); // Add state for email
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('User'); // Default role
-    const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'User' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-    const handleSignup = async (e) => {
-        e.preventDefault();
-        setErrorMessage('');
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-        try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup', {
-                username,
-                email, // Send email to backend
-                password,
-                role,
-            });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
+      alert(response.data.message);
+      navigate('/login'); // Redirect to login page after signup
+    } catch (error) {
+      console.error('Signup failed:', error.response || error);
+      setError(error.response?.data?.error || 'Signup failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            // Handle successful signup
-            console.log('Signup successful:', response.data);
-            window.location.href = '/login'; // Redirect to login page
-        } catch (error) {
-            // Error handling
-            if (error.response) {
-                console.error('Signup error:', error.response.data);
-                setErrorMessage(error.response.data.message);
-            } else {
-                console.error('Signup error:', error.message);
-                setErrorMessage('An unexpected error occurred. Please try again.');
-            }
-        }
-    };
-
-    return (
-        <div className="signup-page">
-            <header className="signup-header">
-                <div className="logo">
-                    <img src={logo} alt="Smart Construction Logo" />
-                    <h1>Smart Construction</h1>
-                </div>
-            </header>
-            <div className="signup-container">
-                <form onSubmit={handleSignup} className="signup-form">
-                    <h2>Sign Up</h2>
-                    {errorMessage && <div className="error-message">{errorMessage}</div>}
-                    <div className="input-group">
-                        <label>Username</label>
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Enter your username"
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Email</label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)} // Update email state
-                            placeholder="Enter your email"
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label>Role</label>
-                        <select value={role} onChange={(e) => setRole(e.target.value)}>
-                            <option value="User">User</option>
-                            <option value="Contractor">Contractor</option>
-                            <option value="ServiceProvider">Service Provider</option>
-                        </select>
-                    </div>
-                    <button type="submit" className="btn-signup">Sign Up</button>
-                </form>
-            </div>
-        </div>
-    );
+  return (
+    <div className="signup-page">
+      <div className="signup-header">
+        <Header hideAuthButtons />
+      </div>
+      <div className="signup-container">
+        <form onSubmit={handleSubmit}>
+          <h2>Create Your Account</h2>
+          {error && <p className="error">{error}</p>}
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <select name="role" value={formData.role} onChange={handleChange} className="role-select">
+            <option value="User">User</option>
+            <option value="Contractor">Contractor</option>
+            <option value="Service Provider">Service Provider</option>
+          </select>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Signing up...' : 'Sign Up'}
+          </button>
+        </form>
+      </div>
+      <div className="signup-footer">
+        <Footer />
+      </div>
+    </div>
+  );
 };
 
 export default SignupPage;
