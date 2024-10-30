@@ -1,9 +1,7 @@
-
-
-
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import './BookConsultation.css';
-import consultationImage from '../../assets/images/consultation-image.jpg'; // Update this path to your image
+import consultationImage from '../../assets/images/consultation-image.jpg'; // Update this path if needed
 
 const BookConsultation = () => {
   return (
@@ -16,7 +14,7 @@ const BookConsultation = () => {
             appraisal service, a consultation, or something uniquely yours. Give
             it room to shine here.
           </p>
-          <a href="/contact" className="consultation-link">Contact Us</a>
+          <Link to="/contact" className="consultation-link">Contact Us</Link> {/* Use Link here */}
         </div>
         <div className="consultation-image">
           <img src={consultationImage} alt="Consultation Room" />

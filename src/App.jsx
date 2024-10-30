@@ -17,7 +17,11 @@ import ContactUs from './pages/ContactUs/ContactUs';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Policy from './pages/Policy/Policy';
 import HelpSupport from './pages/HelpSupport/HelpSupport';
+import BookConsultation from './components/BookConsultation/BookConsultation';
+import Contact from './components/Contact/Contact';
+
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 
@@ -43,6 +47,9 @@ function App() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/help-support" element={<HelpSupport />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<BookConsultation />} />
+        
       
 
       </Routes>
