@@ -1,49 +1,97 @@
-import React from 'react';
-import './SignupPage.css';
-import logo from '../../assets/images/IMG-20241014-WA0010.jpg'; // Replace with your logo image path
+import React, { useState } from 'react';
+import axios from 'axios';
+import './SignupPage.css'; // Make sure you have the CSS file
+import logo from '../../assets/images/IMG-20241014-WA0010.jpg'; // Your logo path
 
-const SignupPage = () => {  // Make sure this is exactly 'SignupPage'
-  return (
-    <div className="signup-page">
-      <header className="signup-header">
-        <div className="logo">
-          <img src={logo} alt="Smart Construction Logo" />
-          <h1>Smart Construction</h1>
+const SignupPage = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState(''); // Add state for email
+    const [password, setPassword] = useState('');
+    const [role, setRole] = useState('User'); // Default role
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        setErrorMessage('');
+
+        try {
+            const response = await axios.post('http://localhost:5000/api/auth/signup', {
+                username,
+                email, // Send email to backend
+                password,
+                role,
+            });
+
+            // Handle successful signup
+            console.log('Signup successful:', response.data);
+            window.location.href = '/login'; // Redirect to login page
+        } catch (error) {
+            // Error handling
+            if (error.response) {
+                console.error('Signup error:', error.response.data);
+                setErrorMessage(error.response.data.message);
+            } else {
+                console.error('Signup error:', error.message);
+                setErrorMessage('An unexpected error occurred. Please try again.');
+            }
+        }
+    };
+
+    return (
+        <div className="signup-page">
+            <header className="signup-header">
+                <div className="logo">
+                    <img src={logo} alt="Smart Construction Logo" />
+                    <h1>Smart Construction</h1>
+                </div>
+            </header>
+            <div className="signup-container">
+                <form onSubmit={handleSignup} className="signup-form">
+                    <h2>Sign Up</h2>
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
+                    <div className="input-group">
+                        <label>Username</label>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Enter your username"
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)} // Update email state
+                            placeholder="Enter your email"
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Enter your password"
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <label>Role</label>
+                        <select value={role} onChange={(e) => setRole(e.target.value)}>
+                            <option value="User">User</option>
+                            <option value="Contractor">Contractor</option>
+                            <option value="ServiceProvider">Service Provider</option>
+                        </select>
+                    </div>
+                    <button type="submit" className="btn-signup">Sign Up</button>
+                </form>
+            </div>
         </div>
-        <nav className="nav-links">
-          <a href="/">Home</a>
-          <a href="/blogs">Blogs</a>
-          <a href="/news">News</a>
-        </nav>
-      </header>
-      <div className="signup-container">
-        <div className="signup-box">
-          <div className="left-box">
-            <h2>Sign Up</h2>
-            <div className="input-group">
-              <label>Username</label>
-              <input type="text" placeholder="Enter your username" />
-            </div>
-            <div className="input-group">
-              <label>Email</label>
-              <input type="email" placeholder="Enter your email" />
-            </div>
-            <div className="input-group">
-              <label>Password</label>
-              <input type="password" placeholder="Enter your password" />
-            </div>
-            <button className="btn-signup">Sign Up</button>
-          </div>
-          <div className="right-box">
-            <h2>Welcome Back!</h2>
-            <p>If you already have an account, sign in below</p>
-            <a href="/login" className="btn-login">Login</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-// Make sure to export 'SignupPage'
 export default SignupPage;

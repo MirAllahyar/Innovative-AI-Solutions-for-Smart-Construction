@@ -7,8 +7,9 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import ContractorLogin from './pages/ContractorLogin/ContractorLogin';
 import ContractorSignup from './pages/ContractorSignup/ContractorSignup';
-import BlogPage from './pages/BlogPage/BlogPage'; // Import the BlogPage
 
+import BlogPage from './pages/BlogPage/BlogPage'; // Import the BlogPage
+import UserDashboard from './pages/UserDashboard/UserDashboard';
 import NewsPage from './pages/NewsPage/NewsPage';
 import AITransformingConstruction from './pages/NewsArticles/AITransformingConstruction';
 import LatestTrends from './pages/NewsArticles/LatestTrends';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/contractor-login" element={<ContractorLogin />} />
         <Route path="/contractor-signup" element={<ContractorSignup />} />
+        <Route path="/userdashboard" element={<UserDashboard />} />
         
         {/* Add the Blogs route */}
         <Route path="/news" element={<NewsPage />} /> {/* Route for NewsPage */}
