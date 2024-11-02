@@ -11,18 +11,22 @@ const SignupPage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Submit the signup form
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
     try {
+      // Make the API call to the backend to create a new user
       const response = await axios.post('http://localhost:5000/api/auth/signup', formData);
-      alert(response.data.message);
-      navigate('/login'); // Redirect to login page after signup
+      alert(response.data.message); // Show success message
+      navigate('/login'); // Redirect to login page
     } catch (error) {
       console.error('Signup failed:', error.response || error);
       setError(error.response?.data?.error || 'Signup failed. Please try again.');

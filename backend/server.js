@@ -1,17 +1,22 @@
 const express = require('express');
-const connectDB = require('./utils/db'); // Import the connectDB function
-const cors = require('cors');
-require('dotenv').config();
+const connectDB = require('./utils/db'); // Corrected path to your DB connection
+const dotenv = require('dotenv');
+const authRoutes = require('./routes/authRoutes');
+const cors = require('cors'); // Import cors
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+dotenv.config();
 
-// Connect to MongoDB
+// Connect to the database
 connectDB();
 
-// Use auth routes
-app.use('/api/auth', require('./routes/authRoutes'));
+const app = express();
+app.use(express.json());
+
+// Use CORS to allow requests from your frontend
+app.use(cors());
+
+// Use the auth routes
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

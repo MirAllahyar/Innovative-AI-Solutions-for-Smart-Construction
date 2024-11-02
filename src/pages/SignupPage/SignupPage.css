@@ -9,7 +9,8 @@
   padding: 0;
 }
 
-.signup-header, .signup-footer {
+.signup-header,
+.signup-footer {
   width: 100%;
 }
 
@@ -21,8 +22,8 @@
   width: 90%;
   max-width: 450px;
   text-align: center;
-  margin-top: 60px; /* Space below header */
-  margin-bottom: 60px; /* Space above footer */
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
 .signup-container h2 {
@@ -32,7 +33,8 @@
   margin-bottom: 25px;
 }
 
-.signup-container input, .signup-container select {
+.signup-container input,
+.signup-container select {
   width: 100%;
   padding: 14px;
   margin-bottom: 20px;
@@ -44,7 +46,8 @@
   transition: border-color 0.3s ease;
 }
 
-.signup-container input:focus, .signup-container select:focus {
+.signup-container input:focus,
+.signup-container select:focus {
   border-color: #3b7e60;
   outline: none;
   background-color: #fff;
@@ -83,6 +86,63 @@
 /* Role selection dropdown */
 .role-select {
   cursor: pointer;
+}
+
+/* Modal Styling */
+.verification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #3b7e60;
+}
+
+.modal-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.modal-content button {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #3b7e60;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #d6a85a;
 }
 
 /* Responsive Styling */

@@ -1,8 +1,14 @@
 const express = require('express');
-const { signup, login } = require('../controllers/authController'); // Make sure these imports are correct
+const { signup, login, verifyEmail } = require('../controllers/authController');
 const router = express.Router();
 
-router.post('/signup', signup); // Route for signup
-router.post('/login', login);    // Route for login
+// Signup route
+router.post('/signup', signup);
+
+// Login route
+router.post('/login', login);
+
+// Email verification route using GET
+router.get('/verify-email', verifyEmail);
 
 module.exports = router;
