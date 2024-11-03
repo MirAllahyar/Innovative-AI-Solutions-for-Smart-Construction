@@ -20,6 +20,8 @@ import Policy from './pages/Policy/Policy';
 import HelpSupport from './pages/HelpSupport/HelpSupport';
 import BookConsultation from './components/BookConsultation/BookConsultation';
 import Contact from './components/Contact/Contact';
+import GenerateFrontElevation from './pages/GenerateFrontElevation/GenerateFrontElevation';
+
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -51,6 +53,7 @@ function App() {
         <Route path="/help-support" element={<HelpSupport />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/" element={<BookConsultation />} />
+        <Route path="/generate-front-elevation" element={<GenerateFrontElevation />} />
         
       
 
