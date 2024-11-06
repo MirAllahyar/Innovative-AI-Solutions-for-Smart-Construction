@@ -1,0 +1,140 @@
+.cost-calculator {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('D:\Riphah University\7\Final Year Project part 1\Development2_backend\Innovative-AI-Solutions-for-Smart-Construction\src\assets\images\hero-image.jpg') no-repeat center center;
+    background-size: cover;
+    background-color: rgba(57, 58, 60, 0.7);
+    background-blend-mode: overlay;
+  }
+  
+  .calculator-content {
+    flex: 1;
+    padding: 40px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .calculator-content h2 {
+    font-size: 36px;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  .calculator-content p {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 40px;
+  }
+  
+  .form-section {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-section label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-top: 15px;
+  }
+  
+  .form-section select,
+  .form-section input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .calculate-button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .calculate-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Modal Styling */
+  .result-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for better focus */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .result-content {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    font-family: Arial, sans-serif;
+  }
+  
+  .result-content h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+  
+  .result-content p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .result-content ul {
+    list-style: none;
+    padding: 0;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: left; /* Left-align for improved readability */
+  }
+  
+  .result-content ul li {
+    margin-bottom: 10px;
+  }
+  
+  .result-content .total-cost {
+    font-size: 24px;
+    font-weight: bold;
+    color: #28a745;
+    margin-top: 15px;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.3s ease;
+  }
+  
+  .close-btn:hover {
+    color: #000;
+  }

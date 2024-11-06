@@ -21,6 +21,7 @@ import HelpSupport from './pages/HelpSupport/HelpSupport';
 import BookConsultation from './components/BookConsultation/BookConsultation';
 import Contact from './components/Contact/Contact';
 import GenerateFrontElevation from './pages/GenerateFrontElevation/GenerateFrontElevation';
+import CostCalculator from './pages/CostCalculator/CostCalculator';
 
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -54,7 +55,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/" element={<BookConsultation />} />
         <Route path="/generate-front-elevation" element={<GenerateFrontElevation />} />
-        
+        <Route path="/cost-calculation" element={<CostCalculator />} />
+
       
 
       </Routes>

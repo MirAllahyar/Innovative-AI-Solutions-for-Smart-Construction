@@ -1,6 +1,6 @@
 import React from 'react';
 import './ExploreSection.css';
-
+//import CostCalculator from './pages/CostCalculator/CostCalculator';
 import { Link } from 'react-router-dom';  // Make sure Link is imported from react-router-dom
 import image1 from '../../assets/images/generate_front_elevation.jpg';
 import image2 from '../../assets/images/cost calculation.jpg';
