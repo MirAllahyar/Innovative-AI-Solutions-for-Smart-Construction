@@ -7,12 +7,11 @@ import io
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS to allow cross-origin requests
+CORS(app)  # Enable CORS to allow requests from the frontend
 
 # Load your trained Generator model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# Define your Generator model (same architecture as in training)
 class GeneratorUNet(torch.nn.Module):
     def __init__(self):
         super(GeneratorUNet, self).__init__()
@@ -54,31 +53,32 @@ class GeneratorUNet(torch.nn.Module):
         out = self.decoder(enc)
         return out
 
-# Initialize and load the model
+# Load the trained model weights
 netG = GeneratorUNet().to(device)
-netG.load_state_dict(torch.load('Pix2Pix_netG_epoch_49.pth', map_location=device), strict=False)
+netG.load_state_dict(torch.load('Pix2Pix_netG_epoch_49.pth', map_location=device))
 netG.eval()
 
-# Define image preprocessing transformations
+# Define image preprocessing
 transform = transforms.Compose([
     transforms.Resize((256, 256)),
     transforms.ToTensor(),
     transforms.Normalize([0.5] * 3, [0.5] * 3)
 ])
 
-# Define a route to handle image generation
 @app.route('/generate', methods=['POST'])
 def generate_image():
     try:
-        # Get the uploaded image from the request
-        file = request.files['image']
-        image = Image.open(file).convert('RGB')
-        input_image = transform(image).unsqueeze(0).to(device)
+        # Retrieve data from the frontend
+        data = request.get_json()
+        plot_size = data.get('plotSize', '5 Marla')  # The plot size from the frontend
+
+        # Generate an image using a placeholder (for now, no input image is used)
+        input_image = torch.zeros((1, 3, 256, 256)).to(device)  # Example input for the model
 
         # Generate the image using the trained model
         with torch.no_grad():
             generated_image = netG(input_image).cpu().squeeze(0)
-            generated_image = (generated_image * 0.5 + 0.5).clamp(0, 1)
+            generated_image = (generated_image * 0.5 + 0.5).clamp(0, 1)  # Denormalize
 
         # Convert the generated image to a PIL image
         generated_image = transforms.ToPILImage()(generated_image)
@@ -94,6 +94,5 @@ def generate_image():
     except Exception as e:
         return jsonify({'error': str(e)})
 
-# Run the Flask app
 if __name__ == '__main__':
     app.run(port=5000)
