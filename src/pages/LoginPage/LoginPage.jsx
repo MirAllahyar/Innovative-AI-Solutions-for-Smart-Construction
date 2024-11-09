@@ -21,21 +21,29 @@ const LoginPage = () => {
     setError(null);
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      console.log('Login Response:', res.data); // Debug response
+  
+      // Store token
       localStorage.setItem('token', res.data.token);
-
+  
+      // Navigate based on role
       if (res.data.role === 'User') {
         navigate('/UserDashboard');
       } else if (res.data.role === 'Contractor') {
         navigate('/ContractorDashboard');
       } else if (res.data.role === 'Service Provider') {
         navigate('/ServiceProviderDashboard');
+      } else {
+        setError('Unknown role. Cannot navigate.');
       }
     } catch (error) {
+      console.error('Login Error:', error.response?.data || error.message);
       setError(error.response?.data?.message || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="login-page">

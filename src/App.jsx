@@ -10,6 +10,7 @@ import ContractorSignup from './pages/ContractorSignup/ContractorSignup';
 
 import BlogPage from './pages/BlogPage/BlogPage'; // Import the BlogPage
 import UserDashboard from './pages/UserDashboard/UserDashboard';
+import ContractorDashboard from './pages/ContractorDashboard/ContractorDashboard';
 import NewsPage from './pages/NewsPage/NewsPage';
 import AITransformingConstruction from './pages/NewsArticles/AITransformingConstruction';
 import LatestTrends from './pages/NewsArticles/LatestTrends';
@@ -41,6 +42,8 @@ function App() {
         <Route path="/contractor-login" element={<ContractorLogin />} />
         <Route path="/contractor-signup" element={<ContractorSignup />} />
         <Route path="/userdashboard" element={<UserDashboard />} />
+        <Route path="/ContractorDashboard" element={<ContractorDashboard />} />
+
         
         {/* Add the Blogs route */}
         <Route path="/news" element={<NewsPage />} /> {/* Route for NewsPage */}
@@ -56,6 +59,7 @@ function App() {
         <Route path="/" element={<BookConsultation />} />
         <Route path="/generate-front-elevation" element={<GenerateFrontElevation />} />
         <Route path="/cost-calculation" element={<CostCalculator />} />
+        
 
       
 
