@@ -1,7 +1,6 @@
 import React from 'react';
 import './ExploreSection.css';
-//import CostCalculator from './pages/CostCalculator/CostCalculator';
-import { Link } from 'react-router-dom';  // Make sure Link is imported from react-router-dom
+import { Link } from 'react-router-dom';  // Ensure Link is imported from react-router-dom
 import image1 from '../../assets/images/generate_front_elevation.jpg';
 import image2 from '../../assets/images/cost calculation.jpg';
 import image3 from '../../assets/images/find contractor.jpg'; 
@@ -17,44 +16,54 @@ const ExploreSection = () => {
         <div className="explore-card">
           <img src={image1} alt="Generate Front Elevation" />
           <div className="card-content">
-            <p>Generate Front Elevation</p>
+            <Link to="/generate-front-elevation" className="explore-button">
+              Generate Front Elevation
+            </Link>
           </div>
         </div>
 
         <div className="explore-card">
           <img src={image2} alt="Cost Calculation" />
           <div className="card-content">
-            <p>
-              <Link to="/cost-calculation">Cost Calculation</Link>
-            </p>
+            <Link to="/cost-calculation" className="explore-button">
+              Cost Calculation
+            </Link>
           </div>
         </div>
 
         <div className="explore-card">
           <img src={image3} alt="Find Contractor" />
           <div className="card-content">
-            <p>Find Contractor</p>
+            <Link to="/find-contractor" className="explore-button">
+              Find Contractor
+            </Link>
           </div>
         </div>
         
         <div className="explore-card">
           <img src={image4} alt="Find Service Provider" />
           <div className="card-content">
-            <p>Find Service Provider</p>
+            <Link to="/find-service-provider" className="explore-button">
+              Find Service Provider
+            </Link>
           </div>
         </div>
         
         <div className="explore-card">
           <img src={image5} alt="Bidding" />
           <div className="card-content">
-            <p>Bidding</p>
+            <Link to="/bidding" className="explore-button">
+              Bidding
+            </Link>
           </div>
         </div>
 
         <div className="explore-card">
           <img src={image6} alt="Community Chat" />
           <div className="card-content">
-            <p>Community Chat</p>
+            <Link to="/community-chat" className="explore-button">
+              Community Chat
+            </Link>
           </div>
         </div>
       </div>

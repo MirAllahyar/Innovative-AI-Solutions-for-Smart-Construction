@@ -50,6 +50,34 @@
   padding: 5px 0;
 }
 
+/* New button styles */
+.explore-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #6c757d; /* Muted gray background */
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: 1px solid transparent; /* Border to create a cleaner look */
+}
+
+.explore-button:hover {
+  background-color: #5a6268; /* Slightly darker gray for hover effect */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.explore-button:focus {
+  outline: none;
+}
+
+.explore-button:active {
+  background-color: #4e555b; /* Even darker gray when clicked */
+  transform: translateY(0); /* Remove lift when clicked */
+}
+
 .explore-card:hover img {
   transform: scale(1.05); /* Slight zoom on hover */
 }
