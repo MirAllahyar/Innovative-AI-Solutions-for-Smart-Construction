@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3074280e.css",
+    "main.js": "/static/js/main.63e21209.js",
+    "static/js/453.64fe3ae5.chunk.js": "/static/js/453.64fe3ae5.chunk.js",
+    "static/media/hero-image3.jpg": "/static/media/hero-image3.c41affcb1dc8ab34a7cf.jpg",
+    "static/media/blog3.jpg": "/static/media/blog3.7e5484ca2c8b464e08ed.jpg",
+    "static/media/IMG-20241014-WA0027.jpg": "/static/media/IMG-20241014-WA0027.815e0bd31438a0a9500d.jpg",
+    "static/media/hero-image1.jpg": "/static/media/hero-image1.580359e1f85205b6ab82.jpg",
+    "static/media/IMG-20241014-WA0010.jpg": "/static/media/IMG-20241014-WA0010.a6b3d85c6071ab9bae09.jpg",
+    "static/media/trending1.jpg": "/static/media/trending1.7a4fd6c4e50d8efebf4d.jpg",
+    "static/media/trending2.jpg": "/static/media/trending2.243a7c55a623ce6f945b.jpg",
+    "static/media/footer-bg.jpg": "/static/media/footer-bg.b5ff7d21d37a1649d31c.jpg",
+    "static/media/IMG-20241014-WA0038.jpg": "/static/media/IMG-20241014-WA0038.c93f0c3e361be2d0143c.jpg",
+    "static/media/IMG-20241014-WA0021.jpg": "/static/media/IMG-20241014-WA0021.c9c7d14e46dae69d11be.jpg",
+    "static/media/trending3.jpg": "/static/media/trending3.e5f28ce99036140127da.jpg",
+    "static/media/blog1.jpg": "/static/media/blog1.abc90d5b9bb8cd2531bc.jpg",
+    "static/media/IMG-20241014-WA0028.jpg": "/static/media/IMG-20241014-WA0028.9872b8ac401a3ce15c6c.jpg",
+    "static/media/IMG-20241014-WA0035.jpg": "/static/media/IMG-20241014-WA0035.a678f6642f3f6b9b78e1.jpg",
+    "static/media/hero-image2.jpg": "/static/media/hero-image2.54693aec8ea2f6016a12.jpg",
+    "static/media/blog2.jpg": "/static/media/blog2.99bfad45f8d29eafa16e.jpg",
+    "static/media/consultation-image.jpg": "/static/media/consultation-image.4ba9672fb98aae400aa4.jpg",
+    "static/media/trending4.jpg": "/static/media/trending4.f38cf04097095fbcbc90.jpg",
+    "static/media/trending5.jpg": "/static/media/trending5.66d57d4f314c2c88a5f5.jpg",
+    "static/media/testimonial-placeholder.jpg": "/static/media/testimonial-placeholder.fb3cde2235e88ad61537.jpg",
+    "static/media/team1.jpg": "/static/media/team1.c96f941de96360fc3531.jpg",
+    "static/media/team2.jpg": "/static/media/team2.755445891a8a88652658.jpg",
+    "static/media/team3.jpg": "/static/media/team3.4667aaf095883840b10c.jpg",
+    "index.html": "/index.html",
+    "main.3074280e.css.map": "/static/css/main.3074280e.css.map",
+    "main.63e21209.js.map": "/static/js/main.63e21209.js.map",
+    "453.64fe3ae5.chunk.js.map": "/static/js/453.64fe3ae5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3074280e.css",
+    "static/js/main.63e21209.js"
+  ]
+}

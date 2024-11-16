@@ -1,98 +1,70 @@
-from flask import Flask, request, jsonify, send_file
-from flask_cors import CORS
-import torch
-from torchvision import transforms
+from flask import Flask, request, jsonify
+from tensorflow.keras.models import load_model
+import tensorflow as tf
+import numpy as np
+import os
 from PIL import Image
 import io
+import base64
+from flask_cors import CORS
 
-# Initialize Flask app
+# Initialize Flask application
 app = Flask(__name__)
-CORS(app)  # Enable CORS to allow requests from the frontend
+CORS(app)  # Enable CORS to allow requests from different origins
 
-# Load your trained Generator model
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Path to the pre-trained generator model
+MODEL_PATH = "generator_final.keras"
 
-class GeneratorUNet(torch.nn.Module):
-    def __init__(self):
-        super(GeneratorUNet, self).__init__()
-        self.encoder = torch.nn.Sequential(
-            torch.nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1),
-            torch.nn.LeakyReLU(0.2, inplace=True),
-            torch.nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(128),
-            torch.nn.LeakyReLU(0.2, inplace=True),
-            torch.nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.LeakyReLU(0.2, inplace=True),
-            torch.nn.Conv2d(256, 512, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(512),
-            torch.nn.LeakyReLU(0.2, inplace=True),
-            torch.nn.Conv2d(512, 512, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(512),
-            torch.nn.LeakyReLU(0.2, inplace=True)
-        )
-        self.decoder = torch.nn.Sequential(
-            torch.nn.ConvTranspose2d(512, 512, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(512),
-            torch.nn.ReLU(inplace=True),
-            torch.nn.ConvTranspose2d(512, 256, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(256),
-            torch.nn.ReLU(inplace=True),
-            torch.nn.ConvTranspose2d(256, 128, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(128),
-            torch.nn.ReLU(inplace=True),
-            torch.nn.ConvTranspose2d(128, 64, kernel_size=4, stride=2, padding=1),
-            torch.nn.BatchNorm2d(64),
-            torch.nn.ReLU(inplace=True),
-            torch.nn.ConvTranspose2d(64, 3, kernel_size=4, stride=2, padding=1),
-            torch.nn.Tanh()
-        )
+# Verify if the model file exists
+if not os.path.exists(MODEL_PATH):
+    raise FileNotFoundError(f"Model file not found at: {os.path.abspath(MODEL_PATH)}")
 
-    def forward(self, x):
-        enc = self.encoder(x)
-        out = self.decoder(enc)
-        return out
+# Load the pre-trained generator model
+generator = load_model(MODEL_PATH)
 
-# Load the trained model weights
-netG = GeneratorUNet().to(device)
-netG.load_state_dict(torch.load('Pix2Pix_netG_epoch_49.pth', map_location=device))
-netG.eval()
+# Function to generate a front elevation image
+def generate_elevation():
+    # Generate random noise vector
+    noise = tf.random.normal([1, 100])
 
-# Define image preprocessing
-transform = transforms.Compose([
-    transforms.Resize((256, 256)),
-    transforms.ToTensor(),
-    transforms.Normalize([0.5] * 3, [0.5] * 3)
-])
+    # Use the generator model to create an image
+    generated_image = generator(noise, training=False)
 
+    # Rescale image from [-1, 1] to [0, 255]
+    generated_image = (generated_image[0] + 1) / 2.0 * 255
+    generated_image = np.array(generated_image, dtype=np.uint8)
+
+    # Convert image to PIL format
+    pil_image = Image.fromarray(generated_image)
+
+    return pil_image
+
+# Route to generate the front elevation image
 @app.route('/generate', methods=['POST'])
-def generate_image():
+def generate():
     try:
-        # Retrieve data from the frontend
-        data = request.get_json()
-        plot_size = data.get('plotSize', '5 Marla')  # The plot size from the frontend
+        # Generate an image
+        generated_image = generate_elevation()
 
-        # Generate an image using a placeholder (for now, no input image is used)
-        input_image = torch.zeros((1, 3, 256, 256)).to(device)  # Example input for the model
+        # Save the image to an in-memory buffer
+        img_io = io.BytesIO()
+        generated_image.save(img_io, format='PNG')
+        img_io.seek(0)
 
-        # Generate the image using the trained model
-        with torch.no_grad():
-            generated_image = netG(input_image).cpu().squeeze(0)
-            generated_image = (generated_image * 0.5 + 0.5).clamp(0, 1)  # Denormalize
+        # Convert the image to Base64 format
+        img_base64 = base64.b64encode(img_io.read()).decode('utf-8')
 
-        # Convert the generated image to a PIL image
-        generated_image = transforms.ToPILImage()(generated_image)
-
-        # Save the generated image to a byte stream
-        img_byte_arr = io.BytesIO()
-        generated_image.save(img_byte_arr, format='PNG')
-        img_byte_arr.seek(0)
-
-        # Send the generated image as a response
-        return send_file(img_byte_arr, mimetype='image/png')
-
+        # Return the image as a JSON response
+        return jsonify({"image": img_base64})
     except Exception as e:
-        return jsonify({'error': str(e)})
+        # Return the error message if generation fails
+        return jsonify({"error": str(e)}), 500
 
+# Route for health check
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "Running", "message": "Model server is up and running!"})
+
+# Main entry point to run the Flask application
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
