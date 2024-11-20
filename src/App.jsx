@@ -7,8 +7,10 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import ContractorLogin from './pages/ContractorLogin/ContractorLogin';
 import ContractorSignup from './pages/ContractorSignup/ContractorSignup';
-import BlogPage from './pages/BlogPage/BlogPage'; // Import the BlogPage
 
+import BlogPage from './pages/BlogPage/BlogPage'; // Import the BlogPage
+import UserDashboard from './pages/UserDashboard/UserDashboard';
+import ContractorDashboard from './pages/ContractorDashboard/ContractorDashboard';
 import NewsPage from './pages/NewsPage/NewsPage';
 import AITransformingConstruction from './pages/NewsArticles/AITransformingConstruction';
 import LatestTrends from './pages/NewsArticles/LatestTrends';
@@ -19,6 +21,9 @@ import Policy from './pages/Policy/Policy';
 import HelpSupport from './pages/HelpSupport/HelpSupport';
 import BookConsultation from './components/BookConsultation/BookConsultation';
 import Contact from './components/Contact/Contact';
+import GenerateFrontElevation from './pages/GenerateFrontElevation/GenerateFrontElevation';
+import CostCalculator from './pages/CostCalculator/CostCalculator';
+
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -36,6 +41,9 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/contractor-login" element={<ContractorLogin />} />
         <Route path="/contractor-signup" element={<ContractorSignup />} />
+        <Route path="/userdashboard" element={<UserDashboard />} />
+        <Route path="/ContractorDashboard" element={<ContractorDashboard />} />
+
         
         {/* Add the Blogs route */}
         <Route path="/news" element={<NewsPage />} /> {/* Route for NewsPage */}
@@ -49,7 +57,10 @@ function App() {
         <Route path="/help-support" element={<HelpSupport />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/" element={<BookConsultation />} />
+        <Route path="/generate-front-elevation" element={<GenerateFrontElevation />} />
+        <Route path="/cost-calculation" element={<CostCalculator />} />
         
+
       
 
       </Routes>

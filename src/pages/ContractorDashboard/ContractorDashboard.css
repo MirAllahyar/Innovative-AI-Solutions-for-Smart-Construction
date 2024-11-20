@@ -1,0 +1,97 @@
+/* Contractor Dashboard Styles */
+.contractor-dashboard {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px 0;
+  }
+  
+  .dashboard-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .dashboard-header p {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  input,
+  textarea {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
+  input:focus,
+  textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+  
+  .update-button {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .update-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .success-message {
+    text-align: center;
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .error-message {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
