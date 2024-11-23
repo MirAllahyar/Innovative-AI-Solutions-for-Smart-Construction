@@ -1,0 +1,73 @@
+.book-consultation {
+    background-color: #433737;
+    color: white;
+    padding: 50px 0;
+  }
+  
+  .consultation-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .consultation-text {
+    flex: 1;
+    padding-right: 30px;
+  }
+  
+  .consultation-text h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .consultation-text p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .consultation-link {
+    font-size: 18px;
+    color: #f1c40f;
+    text-decoration: none;
+    border-bottom: 2px solid #f1c40f;
+    padding-bottom: 5px;
+  }
+  
+  .consultation-link:hover {
+    color: #ffffff;
+    border-bottom: 2px solid #ffffff;
+  }
+  
+  .consultation-image {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .consultation-image img {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .consultation-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .consultation-text {
+      padding-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .consultation-image img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  

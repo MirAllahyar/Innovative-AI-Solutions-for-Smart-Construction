@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+}
+
+.explore-section {
+  min-height: 100vh;
+  width: 100%;
+  text-align: center;
+  padding: 30px 0;
+  background: linear-gradient(135deg, #7c92a7, #8b8b93); /* Gradient background */
+}
+
+.explore-section h2 {
+  font-size: 40px;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  gap: 30px; /* Adjust gap for better spacing */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.explore-card {
+  position: relative;
+  width: 100%; /* Responsive width */
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.explore-card img {
+  width: 100%;
+  height: 250px; /* Maintain consistent height */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.card-content p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.explore-button {
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 30px;
+  margin-top: 0px;
+  background-color: #c0aa55;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: medium;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: 1px solid transparent;
+}
+
+
+.explore-button:hover {
+  background-color: #444;
+}
+/*.explore-button:focus {
+  outline: none;
+}
+  */
+/*
+.explore-button:active {
+  background-color: #4e555b;
+  transform: translateY(0);
+}*/
+/*
+.explore-card:hover img {
+  transform: scale(1.05);
+}
+  */
+/*
+.explore-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+*/
+.explore-footer-text {
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-style: italic;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .explore-section{
+    padding: 30px 30px;
+  }
+  .explore-section h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .explore-card img {
+    height: 180px; /* Adjust image height */
+  }
+
+  .explore-footer-text {
+    font-size: 16px;
+  }
+
+  .card-content p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-section{
+    padding: 30px 30px;
+  }
+  .explore-section h2 {
+    font-size: 28px;
+  }
+
+  .explore-grid {
+    gap: 20px; /* Smaller gap for smaller screens */
+  }
+
+  .explore-card img {
+    height: 160px; /* Smaller height for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .explore-section{
+    padding: 30px 30px;
+  }
+  .explore-section h2 {
+    font-size: 24px;
+  }
+
+  .explore-grid {
+    gap: 15px; /* Reduced gap */
+  }
+
+  .explore-card img {
+    height: 150px; /* Reduced height for extra small screens */
+  }
+
+  .card-content p {
+    font-size: 14px;
+  }
+
+  .explore-footer-text {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+}
