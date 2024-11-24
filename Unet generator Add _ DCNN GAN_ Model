@@ -1,0 +1,188 @@
+# Mount Google Drive to access the dataset
+from google.colab import drive
+drive.mount('/content/drive')
+
+# Import necessary libraries
+import os
+import glob
+import numpy as np
+from tqdm import tqdm
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from tensorflow.keras import layers
+from tensorflow.keras.optimizers import Adam
+import json
+
+# Check if GPU is available
+device_name = tf.test.gpu_device_name()
+print(f'Using device: {device_name}' if device_name else 'GPU device not found')
+
+# Set the dataset path
+dataset_path = '/content/drive/MyDrive/House_Data'  # Update this to your dataset location
+
+# Define image dimensions and parameters
+IMG_HEIGHT = 128
+IMG_WIDTH = 128
+CHANNELS = 3
+NOISE_DIM = 100
+BATCH_SIZE = 32
+BUFFER_SIZE = 10000
+EPOCHS = 2000
+LEARNING_RATE = 1e-4
+NUM_EXAMPLES_TO_GENERATE = 16
+
+# Seed for generating consistent examples
+seed = tf.random.normal([NUM_EXAMPLES_TO_GENERATE, NOISE_DIM])
+
+# Function to load and preprocess images
+def load_images(dataset_path):
+    image_files = glob.glob(os.path.join(dataset_path, '*'))
+    images = []
+    for img_file in tqdm(image_files):
+        try:
+            img = tf.keras.preprocessing.image.load_img(img_file, target_size=(IMG_HEIGHT, IMG_WIDTH))
+            img = tf.keras.preprocessing.image.img_to_array(img)
+            img = (img - 127.5) / 127.5  # Normalize images to [-1, 1]
+            images.append(img)
+        except Exception as e:
+            print(f"Error loading image {img_file}: {e}")
+    return np.array(images)
+
+# Load dataset
+images = load_images(dataset_path)
+print(f"Loaded {images.shape[0]} images.")
+train_dataset = tf.data.Dataset.from_tensor_slices(images).shuffle(BUFFER_SIZE).batch(BATCH_SIZE)
+
+# Generator model using U-Net with complete upsampling
+def build_generator():
+    inputs = tf.keras.Input(shape=(NOISE_DIM,))
+
+    # Fully connected layer and reshape to starting block size
+    x = layers.Dense(8 * 8 * 512, use_bias=False)(inputs)
+    x = layers.BatchNormalization()(x)
+    x = layers.LeakyReLU()(x)
+    x = layers.Reshape((8, 8, 512))(x)
+
+    # Decoder
+    u1 = layers.Conv2DTranspose(256, kernel_size=4, strides=2, padding='same', use_bias=False)(x)
+    u1 = layers.BatchNormalization()(u1)
+    u1 = layers.LeakyReLU()(u1)
+
+    u2 = layers.Conv2DTranspose(128, kernel_size=4, strides=2, padding='same', use_bias=False)(u1)
+    u2 = layers.BatchNormalization()(u2)
+    u2 = layers.LeakyReLU()(u2)
+
+    u3 = layers.Conv2DTranspose(64, kernel_size=4, strides=2, padding='same', use_bias=False)(u2)
+    u3 = layers.BatchNormalization()(u3)
+    u3 = layers.LeakyReLU()(u3)
+
+    # Additional upsampling to reach (128, 128, 3)
+    u4 = layers.Conv2DTranspose(32, kernel_size=4, strides=2, padding='same', use_bias=False)(u3)
+    u4 = layers.BatchNormalization()(u4)
+    u4 = layers.LeakyReLU()(u4)
+
+    # Final output layer to reach (128, 128, 3)
+    output = layers.Conv2DTranspose(CHANNELS, kernel_size=4, strides=1, padding='same', activation='tanh', use_bias=False)(u4)
+
+    model = tf.keras.Model(inputs=inputs, outputs=output)
+    return model
+
+# Discriminator model
+def build_discriminator():
+    model = tf.keras.Sequential([
+        layers.Conv2D(64, kernel_size=4, strides=2, padding='same', input_shape=[IMG_HEIGHT, IMG_WIDTH, CHANNELS]),
+        layers.LeakyReLU(),
+        layers.Dropout(0.3),
+        layers.Conv2D(128, kernel_size=4, strides=2, padding='same'),
+        layers.LeakyReLU(),
+        layers.Dropout(0.3),
+        layers.Conv2D(256, kernel_size=4, strides=2, padding='same'),
+        layers.LeakyReLU(),
+        layers.Dropout(0.3),
+        layers.Flatten(),
+        layers.Dense(1, activation='sigmoid')
+    ])
+    return model
+
+# Create the models
+generator = build_generator()
+discriminator = build_discriminator()
+
+# Define loss function and optimizers
+cross_entropy = tf.keras.losses.BinaryCrossentropy()
+generator_optimizer = Adam(LEARNING_RATE, beta_1=0.5)
+discriminator_optimizer = Adam(LEARNING_RATE, beta_1=0.5)
+
+# Training step
+@tf.function
+def train_step(real_images):
+    noise = tf.random.normal([BATCH_SIZE, NOISE_DIM])
+
+    with tf.GradientTape() as gen_tape, tf.GradientTape() as disc_tape:
+        generated_images = generator(noise, training=True)
+
+        real_output = discriminator(real_images, training=True)
+        fake_output = discriminator(generated_images, training=True)
+
+        gen_loss = cross_entropy(tf.ones_like(fake_output), fake_output)
+        disc_loss_real = cross_entropy(tf.ones_like(real_output) * 0.9, real_output)  # Label smoothing
+        disc_loss_fake = cross_entropy(tf.zeros_like(fake_output), fake_output)
+        disc_loss = disc_loss_real + disc_loss_fake
+
+    gradients_of_generator = gen_tape.gradient(gen_loss, generator.trainable_variables)
+    gradients_of_discriminator = disc_tape.gradient(disc_loss, discriminator.trainable_variables)
+
+    generator_optimizer.apply_gradients(zip(gradients_of_generator, generator.trainable_variables))
+    discriminator_optimizer.apply_gradients(zip(gradients_of_discriminator, discriminator.trainable_variables))
+
+    return gen_loss, disc_loss
+
+# Function to generate and save images
+def generate_and_save_images(model, epoch, test_input):
+    predictions = model(test_input, training=False)
+    predictions = (predictions + 1) / 2.0  # Rescale to [0, 1]
+
+    fig = plt.figure(figsize=(4, 4))
+    for i in range(predictions.shape[0]):
+        plt.subplot(4, 4, i+1)
+        plt.imshow(predictions[i])
+        plt.axis('off')
+    plt.savefig(f'image_at_epoch_{epoch:04d}.png')
+    plt.show()
+
+# Save TensorFlow models and prepare for PyTorch conversion
+def save_model_as_pt(generator, discriminator):
+    # Save TensorFlow/Keras models
+    generator_json = generator.to_json()
+    with open("generator_model.json", "w") as json_file:
+        json.dump(generator_json, json_file)
+    generator.save_weights("generator_weights.h5")
+
+    discriminator_json = discriminator.to_json()
+    with open("discriminator_model.json", "w") as json_file:
+        json.dump(discriminator_json, json_file)
+    discriminator.save_weights("discriminator_weights.h5")
+
+    print("TensorFlow/Keras models saved. Ready for PyTorch conversion.")
+
+# Training loop
+def train(dataset, epochs):
+    for epoch in range(epochs):
+        print(f"Epoch {epoch + 1}/{epochs}")
+        for image_batch in dataset:
+            gen_loss, disc_loss = train_step(image_batch)
+
+        if (epoch + 1) % 100 == 0:
+            generate_and_save_images(generator, epoch + 1, seed)
+            print(f"Epoch {epoch + 1}, Gen Loss: {gen_loss.numpy()}, Disc Loss: {disc_loss.numpy()}")
+
+        if (epoch + 1) % 500 == 0:
+            generator.save_weights(f'generator_epoch_{epoch + 1}.weights.h5')
+            discriminator.save_weights(f'discriminator_epoch_{epoch + 1}.weights.h5')
+
+    generate_and_save_images(generator, epochs, seed)
+    save_model_as_pt(generator, discriminator)
+    print("Model training completed. Models saved.")
+
+# Start training
+train(train_dataset, EPOCHS)
