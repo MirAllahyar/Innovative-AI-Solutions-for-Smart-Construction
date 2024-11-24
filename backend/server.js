@@ -1,9 +1,11 @@
 const express = require('express');
-const connectDB = require('./utils/db'); // Corrected path to your DB connection utility
+const connectDB = require('./utils/db'); // Corrected path to DB connection
 const dotenv = require('dotenv');
-const cors = require('cors'); // Enable Cross-Origin Resource Sharing
-const authRoutes = require('./routes/authRoutes'); // Authentication routes
-const contractorRoutes = require('./routes/contractorRoutes'); // Contractor-related routes
+const cors = require('cors');
+
+const authRoutes = require('./routes/authRoutes'); // Auth routes
+const contractorRoutes = require('./routes/contractorRoutes'); // Contractor routes
+const serviceProviderRoutes = require('./routes/serviceProviderRoutes'); // Service provider routes
 
 dotenv.config(); // Load environment variables
 
@@ -13,19 +15,20 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(express.json()); // For parsing JSON bodies
-app.use(cors()); // Enable CORS to allow requests from the frontend
+app.use(express.json()); // Parse JSON bodies
+app.use(cors()); // Enable CORS for cross-origin requests
 
 // API Routes
-app.use('/api/auth', authRoutes); // Authentication routes
-app.use('/api/contractor', contractorRoutes); // Contractor routes
+app.use('/api/auth', authRoutes);
+app.use('/api/contractor', contractorRoutes);
+app.use('/api/service-provider', serviceProviderRoutes); // <-- Ensure this is mounted
 
-// Default Route for API
+// Default route
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-// Error Handling Middleware
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Something went wrong!', error: err.message });

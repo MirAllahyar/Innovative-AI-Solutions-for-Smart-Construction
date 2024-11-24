@@ -23,9 +23,11 @@ import BookConsultation from './components/BookConsultation/BookConsultation';
 import Contact from './components/Contact/Contact';
 import GenerateFrontElevation from './pages/GenerateFrontElevation/GenerateFrontElevation';
 import CostCalculator from './pages/CostCalculator/CostCalculator';
-
+import ServiceProviderDashboard from './pages/ServiceProviderDashboard/ServiceProviderDashboard';
+import ContractorsPage from './pages/ContractorsPage/ContractorsPage';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 
@@ -43,7 +45,7 @@ function App() {
         <Route path="/contractor-signup" element={<ContractorSignup />} />
         <Route path="/userdashboard" element={<UserDashboard />} />
         <Route path="/ContractorDashboard" element={<ContractorDashboard />} />
-
+        <Route path="/contractors" element={<ContractorsPage />} />
         
         {/* Add the Blogs route */}
         <Route path="/news" element={<NewsPage />} /> {/* Route for NewsPage */}
@@ -59,6 +61,7 @@ function App() {
         <Route path="/" element={<BookConsultation />} />
         <Route path="/generate-front-elevation" element={<GenerateFrontElevation />} />
         <Route path="/cost-calculation" element={<CostCalculator />} />
+        <Route path="/ServiceProviderDashboard" element={<ServiceProviderDashboard />} />
         
 
       

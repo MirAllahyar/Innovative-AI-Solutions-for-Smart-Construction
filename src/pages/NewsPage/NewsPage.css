@@ -1,5 +1,9 @@
 /* Hero Section */
+.news-page{
+  padding-top: 9vh;
+}
 .news-hero-section {
+    
     background-size: cover;
     background-position: center;
     height: 350px;

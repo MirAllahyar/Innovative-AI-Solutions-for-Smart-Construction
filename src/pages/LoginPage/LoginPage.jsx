@@ -22,17 +22,18 @@ const LoginPage = () => {
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
       console.log('Login Response:', res.data); // Debug response
-  
-      // Store token
+
+      // Store token and role in localStorage
       localStorage.setItem('token', res.data.token);
-  
+      localStorage.setItem('role', res.data.role);
+
       // Navigate based on role
       if (res.data.role === 'User') {
-        navigate('/UserDashboard');
+        navigate('/'); // Redirect User to the homepage
       } else if (res.data.role === 'Contractor') {
-        navigate('/ContractorDashboard');
+        navigate('/ContractorDashboard'); // Redirect Contractor to profile management page
       } else if (res.data.role === 'Service Provider') {
-        navigate('/ServiceProviderDashboard');
+        navigate('/ServiceProviderDashboard'); // Redirect Service Provider to profile management page
       } else {
         setError('Unknown role. Cannot navigate.');
       }
@@ -43,7 +44,6 @@ const LoginPage = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="login-page">

@@ -1,8 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 .explore-section {
   min-height: 100vh;
+  width: 100%;
   text-align: center;
   padding: 30px 0;
-  background: linear-gradient(135deg, #7c92a7, #8b8b93); /* Gradient background for better visual */
+  background: linear-gradient(135deg, #7c92a7, #8b8b93); /* Gradient background */
 }
 
 .explore-section h2 {
@@ -14,15 +19,15 @@
 
 .explore-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;  /* Reduced gap to make the grid tighter */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  gap: 30px; /* Adjust gap for better spacing */
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .explore-card {
   position: relative;
-  width: 90%;  /* Take full width of the grid column */
+  width: 100%; /* Responsive width */
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -33,7 +38,7 @@
 
 .explore-card img {
   width: 100%;
-  height: 180px; /* Adjusted height to make the images consistent */
+  height: 250px; /* Maintain consistent height */
   object-fit: cover;
   transition: transform 0.3s ease;
 }
@@ -50,43 +55,45 @@
   padding: 5px 0;
 }
 
-/* New button styles */
 .explore-button {
   display: inline-block;
-  padding: 10px 20px;
-  margin-top: 10px;
-  background-color: #6c757d; /* Muted gray background */
+  padding: 12px 25px;
+  border-radius: 30px;
+  margin-top: 0px;
+  background-color: #c0aa55;
   color: white;
   text-decoration: none;
   font-weight: 500;
-  border-radius: 5px;
+  cursor: pointer;
+  font-size: medium;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  border: 1px solid transparent; /* Border to create a cleaner look */
+  border: 1px solid transparent;
 }
+
 
 .explore-button:hover {
-  background-color: #5a6268; /* Slightly darker gray for hover effect */
-  transform: translateY(-2px); /* Slight lift on hover */
+  background-color: #444;
 }
-
-.explore-button:focus {
+/*.explore-button:focus {
   outline: none;
 }
-
+  */
+/*
 .explore-button:active {
-  background-color: #4e555b; /* Even darker gray when clicked */
-  transform: translateY(0); /* Remove lift when clicked */
-}
-
+  background-color: #4e555b;
+  transform: translateY(0);
+}*/
+/*
 .explore-card:hover img {
-  transform: scale(1.05); /* Slight zoom on hover */
+  transform: scale(1.05);
 }
-
+  */
+/*
 .explore-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-
+*/
 .explore-footer-text {
   margin-top: 40px;
   font-size: 18px;
@@ -97,24 +104,16 @@
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
-  .explore-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;  /* Adjust gap for medium screens */
+  .explore-section{
+    padding: 30px 30px;
   }
-}
-
-@media (max-width: 768px) {
-  .explore-grid {
-    grid-template-columns: 1fr;  /* One column layout for mobile */
-    gap: 20px;
+  .explore-section h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
   }
 
   .explore-card img {
-    height: 160px;  /* Adjust image height for smaller screens */
-  }
-
-  .explore-section h2 {
-    font-size: 32px;
+    height: 180px; /* Adjust image height */
   }
 
   .explore-footer-text {
@@ -123,5 +122,48 @@
 
   .card-content p {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-section{
+    padding: 30px 30px;
+  }
+  .explore-section h2 {
+    font-size: 28px;
+  }
+
+  .explore-grid {
+    gap: 20px; /* Smaller gap for smaller screens */
+  }
+
+  .explore-card img {
+    height: 160px; /* Smaller height for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .explore-section{
+    padding: 30px 30px;
+  }
+  .explore-section h2 {
+    font-size: 24px;
+  }
+
+  .explore-grid {
+    gap: 15px; /* Reduced gap */
+  }
+
+  .explore-card img {
+    height: 150px; /* Reduced height for extra small screens */
+  }
+
+  .card-content p {
+    font-size: 14px;
+  }
+
+  .explore-footer-text {
+    font-size: 14px;
+    margin-top: 20px;
   }
 }

@@ -1,4 +1,6 @@
+
 .cost-calculator {
+  padding-top: 9vh;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -55,16 +57,18 @@
   .calculate-button {
     margin-top: 20px;
     padding: 12px 25px;
-    background-color: #28a745;
+    background-color: #c0aa55;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: medium;
   }
+ 
+  
   
   .calculate-button:hover {
-    background-color: #218838;
+    background-color: #444;
   }
   
   /* Modal Styling */
@@ -136,5 +140,5 @@
   }
   
   .close-btn:hover {
-    color: #000;
+    color: #444;
   }

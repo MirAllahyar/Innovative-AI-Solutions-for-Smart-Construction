@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
-const serviceProviderSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    services: { type: [String], required: true }, // Array of services offered
-    experience: { type: Number, required: true },
-});
+const ServiceProviderSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  contactNumber: { type: String, required: true },
+  services: { type: String, required: true },
+  experience: { type: String, required: true },
+  qualifications: { type: String, required: true },
+}, { timestamps: true });
 
-const ServiceProvider = mongoose.model('ServiceProvider', serviceProviderSchema);
-module.exports = ServiceProvider;
+module.exports = mongoose.model('ServiceProvider', ServiceProviderSchema);

@@ -1,8 +1,9 @@
+// MeetOurTeam.jsx
 import React from 'react';
 import './MeetOurTeam.css';
-import teamMember1 from '../../assets/images/mir.jpg'; // Replace with actual image path
-import teamMember2 from '../../assets/images/touqeer1.jpg'; // Replace with actual image path
-import teamMember3 from '../../assets/images/haider.jpg'; // Replace with actual image path
+import teamMember1 from '../../assets/images/mir.jpg'; 
+import teamMember2 from '../../assets/images/touqeer1.jpg';
+import teamMember3 from '../../assets/images/haider.jpg'; 
 
 const MeetOurTeam = () => {
   return (
@@ -17,7 +18,7 @@ const MeetOurTeam = () => {
         <div className="team-card">
           <img src={teamMember2} alt="Touqeer Shah" />
           <h3>Touqeer Shah</h3>
-          <p>Web Developer </p>
+          <p>Web Developer</p>
         </div>
         <div className="team-card">
           <img src={teamMember3} alt="Haider" />
