@@ -1,3 +1,6 @@
+/* Footer.css */
+
+/* Base Styles */
 .footer {
   background-color: #22262d;
   color: white;
@@ -16,17 +19,20 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footer-column {
-  flex: 1;
-  min-width: 200px;
+  flex: 1 1 300px;
   margin-bottom: 20px;
+  padding: 0 15px;
 }
 
 .footer-column h3 {
   color: #c0aa55;
   margin-bottom: 15px;
+  font-size: 1.5rem;
 }
 
 .footer-column a {
@@ -34,7 +40,7 @@
   color: #fff;
   text-decoration: none;
   margin: 5px 0;
-  font-size: 16px;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
@@ -44,11 +50,15 @@
 
 .footer-column p {
   color: #bbb;
+  font-size: 1rem;
+  margin: 5px 0;
 }
 
 .social-icons {
   display: flex;
   gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .social-icons a {
@@ -63,17 +73,88 @@
 }
 
 /* Responsive Styles */
+
+/* Medium Devices */
+@media (max-width: 992px) {
+  .footer {
+    padding: 40px 20px;
+  }
+
+  .footer-overlay {
+    padding: 30px 15px;
+  }
+
+  .footer-column {
+    flex: 1 1 45%;
+    margin-bottom: 30px;
+  }
+
+  .footer-column h3 {
+    font-size: 1.4rem;
+  }
+
+  .footer-column a,
+  .footer-column p {
+    font-size: 0.95rem;
+  }
+
+  .social-icons a {
+    font-size: 22px;
+  }
+}
+
+/* Small Devices */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
 
   .footer-column {
+    flex: 1 1 100%;
+    max-width: 500px;
     margin-bottom: 30px;
+  }
+
+  .footer-column h3 {
+    font-size: 1.3rem;
+  }
+
+  .footer-column a,
+  .footer-column p {
+    font-size: 0.9rem;
+  }
+
+  .social-icons {
+    justify-content: center;
   }
 
   .social-icons a {
     font-size: 20px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 576px) {
+  .footer {
+    padding: 30px 15px;
+  }
+
+  .footer-overlay {
+    padding: 20px 10px;
+  }
+
+  .footer-column h3 {
+    font-size: 1.2rem;
+  }
+
+  .footer-column a,
+  .footer-column p {
+    font-size: 0.85rem;
+  }
+
+  .social-icons a {
+    font-size: 18px;
   }
 }
