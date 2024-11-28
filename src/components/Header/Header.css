@@ -1,23 +1,23 @@
+/* Base Styles */
 .header {
-  height: 10vh;
   background-color: #22262d;
   padding: 10px 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
 }
 
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
 }
 
-.logo {
+.logo a {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .logo-image {
@@ -25,27 +25,26 @@
   height: 50px;
   margin-right: 10px;
   border-radius: 50%;
-  transition: transform 0.3s ease-in-out;
 }
 
-.logo a {
+.logo-text {
   font-size: 24px;
   font-weight: bold;
   color: #fff;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
 }
 
-.logo:hover .logo-image {
-  transform: scale(1.2);
+.menu-icon {
+  display: block;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1001; /* Ensure the icon is always above the menu */
 }
 
 .nav-links {
   display: flex;
   list-style: none;
-  flex-grow: 1;
-  justify-content: center;
+  align-items: center;
 }
 
 .nav-links li {
@@ -59,91 +58,109 @@
 }
 
 .nav-links li a:hover {
-  color: #3b7e60;
+  color: #c0aa55;
 }
 
 .auth-buttons {
   display: flex;
-  justify-content: flex-end;
-  margin-left: auto;
+  align-items: center;
 }
 
 .btn {
   margin-left: 10px;
   padding: 12px 25px;
   border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: medium;
   background-color: #c0aa55;
   color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: medium;
 }
 
 .btn:hover {
-  background-color: #3b7e60;
+  background-color: #444;
 }
 
-.user-menu {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.user-icon {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* Dropdown Menu */
-.dropdown-menu {
-  position: absolute;
-  top: 45px;
-  right: 0;
-  background-color: #22262d;
-  border: 1px solid #c0aa55;
-  border-radius: 5px;
-  padding: 10px;
-  min-width: 100px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.dropdown-menu button {
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  padding: 5px 10px;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-}
-
-.dropdown-menu button:hover {
-  background-color: #3b7e60;
-  color: #fff;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    right: 0;
-    background-color: #22262d;
-    width: 100%;
-    display: none;
+/* Mobile Styles */
+@media (max-width: 1023px) {
+  .menu-icon {
+    display: block;
   }
 
-  .nav .toggle-menu {
-    display: block;
-    cursor: pointer;
+  .nav-links {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 70%;
+    background-color: #22262d;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+
+  .nav-links.mobile-menu.active {
+    transform: translateX(0);
+    opacity: 1;
   }
 
   .nav-links li {
-    margin: 10px 0;
+    margin: 20px 0;
+  }
+
+  .nav-links li a {
+    font-size: 20px;
+  }
+
+  .auth-buttons {
+    display: none;
+  }
+
+  .btn.mobile-btn {
+    display: inline-block;
+    margin-left: 0;
+    padding: 12px 25px;
+    font-size: 18px;
+    background-color: #c0aa55;
+  }
+
+  .btn.mobile-btn:hover {
+    background-color: #3b7e60;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .menu-icon {
+    display: none;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    position: static;
+    transform: none;
+    opacity: 1;
+    height: auto;
+    width: auto;
+  }
+}
+
+/* Adjustment for Screen Width Below 290px */
+@media (max-width: 290px) {
+  .logo,
+  .nav-links,
+  .auth-buttons {
+    display: none; /* Hide logo, navigation links, and auth buttons */
+  }
+
+  .menu-icon {
+    font-size: 24px; /* Adjust icon size if necessary */
+  }
+
+  .header {
+    padding: 10px 20px; /* Reduce padding to fit small screens */
   }
 }
