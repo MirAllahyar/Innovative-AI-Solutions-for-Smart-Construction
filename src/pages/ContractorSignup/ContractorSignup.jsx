@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './ContractorSignup.css'; // Add this CSS file in the same folder
 import logo from '../../assets/images/IMG-20241014-WA0010.jpg';  // Update the path to your logo image
