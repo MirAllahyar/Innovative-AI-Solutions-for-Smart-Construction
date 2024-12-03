@@ -15,14 +15,45 @@ const CostCalculator = () => {
   const calculateCost = () => {
     let ratePerSqFt;
 
-    // Determine the rate per square foot based on selected options
-    if (constructionType === 'Gray Structure') {
-      ratePerSqFt = constructionMode === 'With Material' ? 2300 : 400;
-    } else if (constructionType === 'Complete Finishing') {
-      ratePerSqFt = constructionMode === 'With Material' ? 4700 : 900;
-    }
+    // Rates per square foot based on city, construction type, and mode
+    const rates = {
+      Islamabad: {
+        'Gray Structure': {
+          'With Material': 2000,
+          'Without Material': 450,
+        },
+        'Complete Finishing': {
+          'With Material': 3500,
+          'Without Material': 750,
+        },
+      },
+      Karachi: {
+        'Gray Structure': {
+          'With Material': 1900,
+          'Without Material': 430,
+        },
+        'Complete Finishing': {
+          'With Material': 3400,
+          'Without Material': 720,
+        },
+      },
+      Chitral: {
+        'Gray Structure': {
+          'With Material': 2300,
+          'Without Material': 470,
+        },
+        'Complete Finishing': {
+          'With Material': 4000,
+          'Without Material': 800,
+        },
+      },
+    };
 
-    // Calculate the total cost based on the area size and number of floors
+    // Retrieve the appropriate rate per square foot based on user input
+    ratePerSqFt =
+      rates[city][constructionType][constructionMode] || 0;
+
+    // Calculate the total cost
     const totalCost = ratePerSqFt * parseInt(areaSize, 10) * parseInt(floors, 10);
     setCost(totalCost);
     setIsModalOpen(true); // Open the modal
@@ -39,7 +70,7 @@ const CostCalculator = () => {
       <div className="calculator-content">
         <h2>Construction Cost Calculator</h2>
         <p>Use our Construction Cost Calculator to get an estimate of required building materials along with their costs.</p>
-        
+
         <div className="form-section">
           <label>City:</label>
           <select value={city} onChange={(e) => setCity(e.target.value)}>
