@@ -10,9 +10,7 @@ const BookConsultation = () => {
         <div className="consultation-text">
           <h2>Book a consultation</h2>
           <p>
-            Highlight specific services or products here. It can be a property
-            appraisal service, a consultation, or something uniquely yours. Give
-            it room to shine here.
+            Easily connect with trusted, verified contractors for your construction needs. Our platform ensures you work with experienced professionals who deliver top-notch services. Schedule a consultation to get expert advice and tailored solutions for your project. Simplify your construction journey with hassle-free collaboration!
           </p>
           <Link to="/contact" className="consultation-link">Contact Us</Link> {/* Use Link here */}
         </div>
