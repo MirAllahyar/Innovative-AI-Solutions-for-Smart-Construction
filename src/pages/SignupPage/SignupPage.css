@@ -4,10 +4,10 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #f5e0b7, #4a8d70);
+  background: linear-gradient(to bottom right, #c0aa55, #444);
   align-items: center;
   justify-content: space-between;
-  padding: 10vh 0 0 0;
+  padding: 11vh 0 0 0;
 }
 
 .signup-header,
@@ -16,7 +16,6 @@
 }
 
 .signup-container {
-  
   background-color: #fff;
   padding: 50px;
   border-radius: 15px;
@@ -31,7 +30,7 @@
 .signup-container h2 {
   font-size: 32px;
   font-weight: bold;
-  color: #4a8d70;
+  color: #444;
   margin-bottom: 20px;
 }
 
@@ -61,7 +60,7 @@
   padding: 15px;
   font-size: 18px;
   font-weight: bold;
-  background-color: #4a8d70;
+  background-color: #c0aa55;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -71,12 +70,12 @@
 }
 
 .signup-container button:disabled {
-  background-color: #86bda3;
+  background-color: #444;
   cursor: not-allowed;
 }
 
 .signup-container button:hover:enabled {
-  background-color: #f5b860;
+  background-color: #444;
   transform: translateY(-3px);
 }
 
@@ -136,7 +135,7 @@
 .modal-content button {
   padding: 12px 20px;
   font-size: 16px;
-  background-color: #4a8d70;
+  background-color: #c0aa55;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -145,14 +144,69 @@
 }
 
 .modal-content button:hover {
-  background-color: #f5b860;
+  background-color: #444;
 }
 
 /* Responsive Styling */
+
+/* Mobile screens */
+@media (max-width: 576px) {
+  .signup-container {
+    padding: 20px 15px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+  }
+
+  .signup-container h2 {
+    font-size: 20px;
+  }
+
+  .signup-container input,
+  .signup-container select {
+    font-size: 10px;
+    padding: 10px;
+  }
+
+  .signup-container button {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .modal-content h3 {
+    font-size: 15px;
+  }
+
+  .modal-content p {
+    font-size: 12px;
+  }
+}
+
+/* Tablet screens */
 @media (max-width: 768px) {
   .signup-container {
     padding: 30px 20px;
-    margin-top: 80px;
-    margin-bottom: 80px;
+  }
+
+  .signup-container h2 {
+    font-size: 28px;
+  }
+
+  .signup-container input,
+  .signup-container select {
+    font-size: 15px;
+    padding: 13px;
+  }
+
+  .signup-container button {
+    font-size: 17px;
+    padding: 14px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .signup-container {
+    padding: 60px 40px;
   }
 }
