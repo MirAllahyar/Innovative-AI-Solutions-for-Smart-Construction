@@ -9,16 +9,36 @@ const SignupPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'User' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [nameError, setNameError] = useState(null); // State for name validation error
   const navigate = useNavigate();
 
   // Handle input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Validate name field
+    if (name === 'name') {
+      const isValidName = /^[A-Za-z\s]+$/.test(value); // Allow only alphabets and spaces
+      if (!isValidName && value !== '') {
+        setNameError('Name can only contain alphabets and spaces.');
+      } else {
+        setNameError(null); // Clear the error if the name is valid
+      }
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   // Submit the signup form
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Prevent submission if the name is invalid
+    if (nameError) {
+      alert('Please correct the errors before submitting.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -52,6 +72,7 @@ const SignupPage = () => {
             onChange={handleChange}
             required
           />
+          {nameError && <p className="error">{nameError}</p>} {/* Show name validation error */}
           <input
             type="email"
             name="email"
@@ -86,3 +107,4 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+
