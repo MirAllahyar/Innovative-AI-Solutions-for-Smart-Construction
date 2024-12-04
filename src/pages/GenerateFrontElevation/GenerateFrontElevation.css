@@ -1,5 +1,7 @@
 /* General container styles */
+
 .app-container {
+  padding-top: 9vh;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -10,6 +12,7 @@
 
 .main-content {
   flex: 1;
+  min-height: 91vh;
   padding: 50px;
   display: flex;
   justify-content: center;
@@ -39,7 +42,7 @@
 .title {
   font-size: 32px;
   font-weight: bold;
-  color: #007bff;
+  color: #c0aa55;
   margin-bottom: 10px;
 }
 
@@ -78,18 +81,18 @@
 }
 
 .generate-btn {
-  background-color: #007bff;
+  margin-top: 20px;
+  padding: 20px 30px;
+  background-color: #c0aa55;
   color: white;
   border: none;
-  padding: 15px 30px;
-  font-size: 18px;
+  border-radius: 30px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  font-size: large;
 }
 
 .generate-btn:hover {
-  background-color: #0056b3;
+  background-color: #444;
 }
 
 .generate-btn:disabled {
@@ -157,4 +160,5 @@
     padding: 12px 20px;
   }
 }
+
 
