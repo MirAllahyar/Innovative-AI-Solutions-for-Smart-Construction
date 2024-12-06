@@ -18,3 +18,4 @@ const LatestTrends = () => {
 };
 
 export default LatestTrends;
+
