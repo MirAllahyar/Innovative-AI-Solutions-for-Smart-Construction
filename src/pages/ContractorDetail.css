@@ -1,0 +1,32 @@
+.contractor-detail-page {
+padding-top: 10vh;  
+  background-color: #f9f9f9;
+  }
+  
+  .contractor-header {
+    display: flex;
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .contractor-header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .contractor-header h1 {
+    font-size: 24px;
+  }
+  
+  .contractor-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
