@@ -1,0 +1,264 @@
+/* Base Layout for Service Provider Page */
+.service-provider-page {
+    padding: 10vh 20px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f5f5f5; /* Same background color as find contractor */
+    font-family: Arial, sans-serif;
+    gap: 20px;
+  }
+  
+  /* Filter Section Styling */
+  .filter-section {
+    width: 25%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    border-left: 5px solid #c0aa55; /* Accent border to match find contractor */
+  }
+  
+  .filter-section h3 {
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 20px;
+  }
+  
+  .filter-group h4 {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
+  .filter-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .filter-section ul li {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .filter-section ul li:hover {
+    color: #c0aa55; /* Accent hover color */
+  }
+  
+  /* Service Provider List Section */
+  .service-provider-list {
+    flex: 1;
+    width: 70%;
+  }
+  
+  .service-provider-list h1 {
+    font-size: 28px;
+    color: #22262d;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  /* Provider Card Styling */
+  .provider-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-left: 5px solid #c0aa55; /* Accent border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .provider-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Provider Picture Styling */
+  .provider-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid #c0aa55; /* Match theme */
+  }
+  
+  .provider-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Provider Details Styling */
+  .provider-details {
+    flex-grow: 1;
+  }
+  
+  .provider-details h2 {
+    font-size: 22px;
+    color: #c0aa55; /* Match theme color */
+    margin-bottom: 10px;
+  }
+  
+  .provider-details p {
+    font-size: 16px;
+    color: #555555;
+    margin: 5px 0;
+  }
+  
+  /* Active filter styling */
+  .filter-section ul li.active-filter {
+    font-weight: bold;
+    color: #444;
+  }
+  
+  /* Button Styling */
+  button {
+    background-color: #c0aa55; /* Match theme color */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #a08d45; /* Slightly darker shade */
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #c0aa55; /* Accent border */
+  }
+  
+  .search-bar input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .search-bar button {
+    background-color: #c0aa55;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-bar button:hover {
+    background-color: #a08d45;
+  }
+  
+  /* Rating Filter */
+  .rating-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  /* Default rating item color */
+  .rating-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    color: #c0aa55; /* default color */
+  }
+  
+  .rating-item:hover {
+    transform: scale(1.03);
+  }
+  
+  .rating-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #c0aa55;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50%;
+  }
+  
+  .rating-stars {
+    color: #c0aa55;
+    font-size: 16px;
+  }
+  
+  /* When rating is active, change color to #444 */
+  .rating-item.active {
+    color: #444;
+  }
+  
+  .rating-item.active .rating-circle {
+    background-color: #444;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .service-provider-page {
+      flex-direction: column;
+    }
+  
+    .filter-section {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .provider-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+  
+    button {
+      align-self: flex-end;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .provider-card {
+      padding: 15px;
+    }
+  
+    .filter-section h3,
+    .service-provider-list h1 {
+      text-align: center;
+    }
+  
+    button {
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+  }
+  
