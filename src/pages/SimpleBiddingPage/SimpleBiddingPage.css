@@ -1,0 +1,135 @@
+/* SimpleBiddingPage.css */
+
+/* Container */
+.bidding-container {
+    padding: 10vh 20px;
+    background-color: #f5f5f5; /* Match your theme background */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Page Title */
+  .bidding-container h1 {
+    font-size: 32px;
+    color: #22262d;
+    margin-bottom: 20px;
+  }
+  
+  /* Job Post Form */
+  .job-post-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #c0aa55; /* Accent color */
+  }
+  
+  .job-post-form h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #444;
+  }
+  
+  .job-post-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .job-post-form input,
+  .job-post-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .job-post-form button {
+    width: 130px;
+    padding: 10px;
+    background-color: #c0aa55; /* Accent color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+  }
+  .job-post-form button:hover {
+    background-color: #a08d45; /* Slightly darker accent */
+  }
+  
+  /* Job List Section */
+  .job-list {
+    margin-bottom: 20px;
+  }
+  
+  .job-list h2 {
+    font-size: 24px;
+    color: #22262d;
+    margin-bottom: 15px;
+  }
+  
+  /* Job Card */
+  .job-card {
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #c0aa55; /* Accent border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .job-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .job-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #c0aa55; /* Theme accent for headings */
+  }
+  
+  .job-card p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .bidding-container {
+      padding: 5vh 10px;
+    }
+    
+    .job-post-form {
+      margin-bottom: 20px;
+    }
+  
+    .job-list h2 {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .job-post-form button {
+      width: 100%;
+      font-size: 14px;
+    }
+  
+    .job-card {
+      padding: 15px;
+    }
+  
+    .job-card h3 {
+      font-size: 18px;
+    }
+  
+    .job-card p {
+      font-size: 14px;
+    }
+  }
+  
