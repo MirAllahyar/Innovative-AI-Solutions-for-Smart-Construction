@@ -49,8 +49,8 @@ const Header = ({ hideAuthButtons = false }) => {
           <li><a href="/" onClick={closeMobileMenu}>Home</a></li>
           <li><a href="/blogs" onClick={closeMobileMenu}>Blogs</a></li>
           <li><a href="/news" onClick={closeMobileMenu}>News</a></li>
-          <li><a href="/service-provider" onClick={closeMobileMenu}>Service Provider</a></li>
-          <li><a href="/contractor-login" onClick={closeMobileMenu}>Contractor</a></li>
+          <li><a href="/service-providers" onClick={closeMobileMenu}>Service Provider</a></li>
+          <li><a href="/contractors" onClick={closeMobileMenu}>Contractor</a></li>
 
           {/* Authentication Buttons for Mobile */}
           {!isLoggedIn && !hideAuthButtons ? (
