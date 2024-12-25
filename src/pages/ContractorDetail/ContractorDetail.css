@@ -1,32 +1,168 @@
 .contractor-detail-page {
-padding-top: 10vh;  
-  background-color: #f9f9f9;
+  padding: 11vh 40px;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  min-height: calc(100vh - 11vh);
+}
+
+/* Hero Section */
+.contractor-hero {
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #c0aa55; /* accent border */
+  overflow: hidden;
+}
+
+.contractor-hero img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 20px;
+  flex-shrink: 0;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  color: #333;
+}
+
+.hero-text h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #22262d;
+}
+
+.specialization {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.experience,
+.location {
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* About Section */
+.contractor-about {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #c0aa55; /* accent border */
+}
+
+.contractor-about h2 {
+  font-size: 22px;
+  color: #22262d;
+  margin-bottom: 10px;
+}
+
+.contractor-about p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Skills or Specializations */
+.contractor-skills {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #c0aa55;
+}
+
+.contractor-skills h3 {
+  font-size: 20px;
+  color: #22262d;
+  margin-bottom: 10px;
+}
+
+.contractor-skills ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contractor-skills li {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.contractor-skills li::before {
+  content: '•';
+  color: #c0aa55;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Contact Section */
+.contractor-contact {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #c0aa55;
+}
+
+.contractor-contact h3 {
+  font-size: 20px;
+  color: #22262d;
+  margin-bottom: 10px;
+}
+
+.contractor-contact p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.accent-note {
+  color: #444;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contractor-hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-  
-  .contractor-header {
-    display: flex;
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
+
+  .hero-text {
+    padding: 10px;
   }
-  
-  .contractor-header img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
+
+  .contractor-hero img {
+    margin: 10px;
   }
-  
-  .contractor-header h1 {
-    font-size: 24px;
+}
+
+@media (max-width: 480px) {
+  .contractor-hero img {
+    width: 140px;
+    height: 140px;
   }
-  
-  .contractor-info {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  .hero-text h1 {
+    font-size: 20px;
   }
-  
+}
