@@ -1,0 +1,202 @@
+/* General Container */
+.book-consultation-container {
+    padding: 11vh 50px;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+  }
+  
+  .book-consultation-container h1 {
+    font-size: 32px;
+    color: #22262d;
+    margin-bottom: 10px;
+  }
+  
+  .book-consultation-container p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  /* Contractor List */
+  .contractor-list h2 {
+    font-size: 24px;
+    color: #22262d;
+    margin-bottom: 20px;
+  }
+  
+  /* Grid for contractors: max 3 columns, 90% width, centered */
+  .contractors-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+    gap: 40px;
+    width: 90vw; /* 90% of the viewport width */
+    margin: 0 auto; /* center the grid */
+  }
+  
+  /* Contractor Card */
+  .contractor-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    gap: 15px;
+    border-left: 5px solid transparent;
+    min-height: 150px; /* keeps them uniform in height */
+  }
+  
+  .contractor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .contractor-card.selected {
+    border-left: 5px solid #c0aa55;
+  }
+  
+  /* Contractor Image */
+  .contractor-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* Contractor Info */
+  .contractor-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 1.4;
+  }
+  
+  .contractor-info h3 {
+    font-size: 20px;
+    margin: 3px 0;
+    color: #22262d;
+  }
+  
+  .contractor-info p {
+    font-size: 15px;
+    color: #555;
+    margin: 2px 0;
+  }
+  
+  .rating {
+    color: #c0aa55;
+    font-weight: bold;
+  }
+  
+  /* Consultation Form */
+  .consultation-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    border-left: 5px solid #c0aa55;
+  }
+  
+  .consultation-form h2 {
+    font-size: 24px;
+    color: #22262d;
+    margin-bottom: 10px;
+  }
+  
+  .selected-contractor {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .consultation-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .consultation-form input,
+  .consultation-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .consultation-form button {
+    width: 150px;
+    padding: 12px;
+    background-color: #c0aa55;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .consultation-form button:hover {
+    background-color: #a08d45;
+  }
+  .consultation-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Success Message */
+  .success-message {
+    margin-top: 15px;
+    color: #28a745;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .contractors-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .book-consultation-container {
+      padding: 5vh 10px;
+    }
+  
+    .contractors-grid {
+      grid-template-columns: 1fr; /* 1 column on tablets */
+    }
+  
+    .contractor-card {
+      flex-direction: row;
+      align-items: center;
+      min-height: auto;
+    }
+  
+    .consultation-form button {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .book-consultation-container h1 {
+      font-size: 24px;
+    }
+  
+    .contractor-info h3 {
+      font-size: 18px;
+    }
+  
+    .consultation-form button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .consultation-form input,
+    .consultation-form textarea {
+      font-size: 14px;
+    }
+  }
+  
