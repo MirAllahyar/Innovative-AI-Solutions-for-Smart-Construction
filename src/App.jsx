@@ -23,11 +23,27 @@ import Contact from './components/Contact/Contact';
 import GenerateFrontElevation from './pages/GenerateFrontElevation/GenerateFrontElevation';
 import CostCalculator from './pages/CostCalculator/CostCalculator';
 
-// ** Import the FindContractor component **
+// Import FindContractor and ContractorDetail
 import FindContractor from './pages/FindContractor/findContractor';
-
-// Import ContractorDetail for route
 import ContractorDetail from './pages/ContractorDetail/ContractorDetail';
+
+// Import ServiceProvider
+import ServiceProvider from './pages/ServiceProvider/ServiceProvider';
+
+// ** Import Bidding System Components **
+import JobPostForm from './pages/Bidding/JobPostForm/JobPostForm';
+import JobList from './pages/Bidding/JobList/JobList';
+import BidList from './pages/Bidding/BidList/BidList';
+
+
+import SimpleBiddingPage from './pages/SimpleBiddingPage/SimpleBiddingPage';
+
+
+// ** Import CommunityChat **
+import CommunityChat from './pages/CommunityChat/CommunityChat';
+
+import BookConsultation1 from './pages/BookConsultation1/BookConsultation1';
+
 
 // FontAwesome CSS
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -57,6 +73,19 @@ function App() {
         <Route path="/contractors" element={<FindContractor />} />
         <Route path="/contractor/:id" element={<ContractorDetail />} />
 
+        {/* Service Provider Pages */}
+        <Route path="/service-providers" element={<ServiceProvider />} />
+
+        {/* Bidding System Routes */}
+        <Route path="/bidding/post-job" element={<JobPostForm />} />
+        <Route path="/bidding/job-list" element={<JobList />} />
+        <Route path="/bidding/bids/:jobId" element={<BidList />} />
+
+        <Route path="/biddings" element={<SimpleBiddingPage />} />
+
+         {/* Community Chat */}
+         <Route path="/community-chat" element={<CommunityChat />} />
+
         {/* Blogs and News */}
         <Route path="/blogs" element={<BlogPage />} />
         <Route path="/news" element={<NewsPage />} />
@@ -67,10 +96,12 @@ function App() {
         {/* Dashboards */}
         <Route path="/userdashboard" element={<UserDashboard />} />
         <Route path="/contractordashboard" element={<ContractorDashboard />} />
+
+        <Route path="/book-consultation1" element={<BookConsultation1 />} />
+
       </Routes>
     </Router>
   );
 }
 
 export default App;
-
