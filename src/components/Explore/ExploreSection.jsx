@@ -34,7 +34,7 @@ const ExploreSection = () => {
         <div className="explore-card">
           <img src={image3} alt="Find Contractor" />
           <div className="card-content">
-            <Link to="/find-contractor" className="explore-button">
+            <Link to="/contractors" className="explore-button">
               Find Contractor
             </Link>
           </div>
@@ -43,7 +43,7 @@ const ExploreSection = () => {
         <div className="explore-card">
           <img src={image4} alt="Find Service Provider" />
           <div className="card-content">
-            <Link to="/find-service-provider" className="explore-button">
+            <Link to="/service-providers" className="explore-button">
               Find Service Provider
             </Link>
           </div>
@@ -52,7 +52,8 @@ const ExploreSection = () => {
         <div className="explore-card">
           <img src={image5} alt="Bidding" />
           <div className="card-content">
-            <Link to="/bidding" className="explore-button">
+            {/* Redirect to the job post form */}
+            <Link to="/biddings" className="explore-button">
               Bidding
             </Link>
           </div>
