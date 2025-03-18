@@ -1,0 +1,21 @@
+.avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* cursor: pointer; */
+  }
+  
+  .avatar-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .avatar-container:hover .avatar-image {
+    border-color: #007bff;
+    transform: scale(1.05);
+  }
