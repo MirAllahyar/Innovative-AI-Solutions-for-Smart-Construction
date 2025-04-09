@@ -1,14 +1,35 @@
-const express = require('express');
-const { signup, login, verifyEmail } = require('../controllers/authController');
+import express from "express";
+import {
+  login,
+  logout,
+  signup,
+  verifyEmail,
+  forgotPassword,
+  resetPassword,
+  me,
+  updateProfile,
+  getUser,
+} from "../controller/auth.controller.js";
+
+import { isAuthenticated } from "../middleware/isAuthenticated.js";
+import upload from "../middleware/multer.js";
 const router = express.Router();
 
-// Signup route
-router.post('/signup', signup);
+router.post("/signup", upload.single("avatar"), signup);
+router.post("/verify-email", verifyEmail);
 
-// Login route
-router.post('/login', login);
+router.post("/login", login);
+router.post("/logout", logout);
+router.get("/me", isAuthenticated, me);
+router.get("/get-user/:id", getUser);
 
-// Email verification route using GET
-router.get('/verify-email', verifyEmail);
+router.patch(
+  "/update-profile",
+  isAuthenticated,
+  upload.single("avatar"),
+  updateProfile
+);
+router.post("/forget-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
-module.exports = router;
+export default router;
