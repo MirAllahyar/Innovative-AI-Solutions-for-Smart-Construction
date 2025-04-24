@@ -1,126 +1,162 @@
-import React, { useState } from 'react';
-import './ServiceProvider.css';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "./ServiceProvider.css";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import { useNavigate } from "react-router-dom";
+import { backend_url } from "../../server";
 
 const ServiceProvider = () => {
   const navigate = useNavigate();
-
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [selectedExpertise, setSelectedExpertise] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [allProviders, setAllProviders] = useState([]); // Store all providers
+  const [filteredProviders, setFilteredProviders] = useState([]); // Store filtered providers
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedExpertise, setSelectedExpertise] = useState("");
   const [selectedRating, setSelectedRating] = useState(0);
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
-  const serviceProviders = [
-    {
-      id: 1,
-      name: 'Ahmed Khan',
-      expertise: 'Plumber',
-      location: 'Islamabad',
-      rating: 5,
-      description: 'Expert in residential plumbing with over 10 years of experience.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 2,
-      name: 'Ali Raza',
-      expertise: 'Electrician',
-      location: 'Karachi',
-      rating: 4,
-      description: 'Specialist in wiring and electrical installations.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 3,
-      name: 'Usman Tariq',
-      expertise: 'Carpenter',
-      location: 'Lahore',
-      rating: 4,
-      description: 'Experienced carpenter focused on custom furniture and fittings.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 4,
-      name: 'Bilal Ahmed',
-      expertise: 'Painter',
-      location: 'Rawalpindi',
-      rating: 5,
-      description: 'Specializes in interior and exterior painting.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 5,
-      name: 'Hamza Iqbal',
-      expertise: 'Mason',
-      location: 'Faisalabad',
-      rating: 3,
-      description: 'Skilled in brickwork and concrete construction.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 6,
-      name: 'Tariq Hussain',
-      expertise: 'Labour',
-      location: 'Quetta',
-      rating: 5,
-      description: 'Efficient and hardworking construction laborer.',
-      image: 'https://via.placeholder.com/100',
-    },
-  ];
+  useEffect(() => {
+    fetch(
+      `${backend_url}/service-provider/get-all-service-providers?page=${currentPage}&limit=100`, // Fetch more items for frontend filtering
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setAllProviders(data.serviceprovider);
+        setTotalPages(data.totalPages);
+      });
+  }, [currentPage]);
 
-  // Filter logic
-  const filteredProviders = serviceProviders.filter((provider) => {
-    const matchesSearch = provider.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLocation =
-      selectedLocation === '' || provider.location === selectedLocation;
-    const matchesExpertise =
-      selectedExpertise === '' || provider.expertise === selectedExpertise;
-    const matchesRating =
-      selectedRating === 0 || provider.rating === selectedRating;
+  // Apply filters whenever they change
+  useEffect(() => {
+    let result = [...allProviders];
 
-    return matchesSearch && matchesLocation && matchesExpertise && matchesRating;
-  });
+    // Apply search filter
+    if (searchQuery) {
+      result = result.filter(
+        (provider) =>
+          provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          (provider.company &&
+            provider.company
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())) ||
+          provider.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Apply location filter
+    if (selectedLocation) {
+      result = result.filter(
+        (provider) => provider.location === selectedLocation
+      );
+    }
+
+    // Apply expertise filter
+    if (selectedExpertise) {
+      result = result.filter(
+        (provider) => provider.experties === selectedExpertise
+      );
+    }
+
+    // Apply rating filter
+    if (selectedRating > 0) {
+      result = result.filter(
+        (provider) => Math.floor(provider.maxRating) === selectedRating
+      );
+    }
+
+    setFilteredProviders(result);
+    setCurrentPage(1); // Reset to page 1 when filters change
+  }, [
+    allProviders,
+    searchQuery,
+    selectedLocation,
+    selectedExpertise,
+    selectedRating,
+  ]);
+
+  // Pagination logic
+  const itemsPerPage = 5;
+  const totalFilteredPages = Math.ceil(filteredProviders.length / itemsPerPage);
+  const paginatedProviders = filteredProviders.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const viewDetails = (id) => {
     navigate(`/service-provider/${id}`);
   };
 
   const handleLocationClick = (location) => {
-    setSelectedLocation(location === selectedLocation ? '' : location);
+    setSelectedLocation(location === selectedLocation ? "" : location);
+    setCurrentPage(1);
+    setIsFiltersVisible(false);
   };
 
   const handleExpertiseClick = (expertise) => {
-    setSelectedExpertise(expertise === selectedExpertise ? '' : expertise);
+    setSelectedExpertise(expertise === selectedExpertise ? "" : expertise);
+    setCurrentPage(1);
+    setIsFiltersVisible(false);
   };
 
   const handleRatingClick = (rating) => {
     setSelectedRating(rating === selectedRating ? 0 : rating);
+    setCurrentPage(1);
+    setIsFiltersVisible(false);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
   };
 
   return (
     <>
       <Header />
       <div className="service-provider-page">
+        <div
+          className="filter-icon"
+          onClick={() => setIsFiltersVisible(!isFiltersVisible)}
+        >
+          <i className="fas fa-filter"></i>
+        </div>
+
         {/* Filters Section */}
-        <aside className="filter-section">
+        <aside
+          className={`filter-section ${isFiltersVisible ? "visible" : ""}`}
+        >
           <h3>Filters</h3>
 
           {/* Location Filter */}
           <div className="filter-group">
             <h4>Location</h4>
             <ul>
-              {['Islamabad', 'Karachi', 'Lahore', 'Rawalpindi', 'Faisalabad', 'Quetta'].map(
-                (location) => (
-                  <li
-                    key={location}
-                    className={selectedLocation === location ? 'active-filter' : ''}
-                    onClick={() => handleLocationClick(location)}
-                  >
-                    {location}
-                  </li>
-                )
-              )}
+              {[
+                "Islamabad",
+                "Karachi",
+                "Lahore",
+                "Rawalpindi",
+                "Faisalabad",
+                "Quetta",
+              ].map((location) => (
+                <li
+                  key={location}
+                  className={
+                    selectedLocation === location ? "active-filter" : ""
+                  }
+                  onClick={() => handleLocationClick(location)}
+                >
+                  {location}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -128,34 +164,43 @@ const ServiceProvider = () => {
           <div className="filter-group">
             <h4>Expertise</h4>
             <ul>
-              {['Plumber', 'Electrician', 'Carpenter', 'Painter', 'Mason', 'Labour'].map(
-                (expertise) => (
-                  <li
-                    key={expertise}
-                    className={selectedExpertise === expertise ? 'active-filter' : ''}
-                    onClick={() => handleExpertiseClick(expertise)}
-                  >
-                    {expertise}
-                  </li>
-                )
-              )}
+              {[
+                "Plumber",
+                "Electrician",
+                "Carpenter",
+                "Painter",
+                "Mason",
+                "Labour",
+              ].map((expertise) => (
+                <li
+                  key={expertise}
+                  className={
+                    selectedExpertise === expertise ? "active-filter" : ""
+                  }
+                  onClick={() => handleExpertiseClick(expertise)}
+                >
+                  {expertise}
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Rating Filter (EXACT MATCH, toggles on/off) */}
+          {/* Rating Filter */}
           <div className="filter-group">
             <h4>Rating</h4>
             <div className="rating-filter">
               {[5, 4, 3, 2, 1].map((rating) => (
                 <div
                   key={rating}
-                  className={`rating-item ${selectedRating === rating ? 'active' : ''}`}
+                  className={`rating-item ${
+                    selectedRating === rating ? "active" : ""
+                  }`}
                   onClick={() => handleRatingClick(rating)}
                 >
                   <span className="rating-circle">{rating}</span>
                   <span className="rating-stars">
-                    {'★'.repeat(rating)}
-                    {'☆'.repeat(5 - rating)}
+                    {"★".repeat(rating)}
+                    {"☆".repeat(5 - rating)}
                   </span>
                 </div>
               ))}
@@ -165,7 +210,7 @@ const ServiceProvider = () => {
 
         {/* Providers List Section */}
         <main className="service-provider-list">
-          <h1>Find Service Providers</h1>
+          <h1 id="text">Find Service Providers</h1>
 
           {/* Search Bar */}
           <div className="search-bar">
@@ -173,7 +218,7 @@ const ServiceProvider = () => {
               type="text"
               placeholder="Search service provider..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange}
             />
             <button>
               <i className="fas fa-search"></i>
@@ -181,31 +226,61 @@ const ServiceProvider = () => {
           </div>
 
           {/* Provider Cards */}
-          {filteredProviders.length > 0 ? (
-            filteredProviders.map((provider) => (
-              <div key={provider.id} className="provider-card">
+          {paginatedProviders.length > 0 ? (
+            paginatedProviders.map((provider) => (
+              <div key={provider._id} className="provider-card">
                 <div className="provider-picture">
-                  <img src={provider.image} alt={provider.name} />
+                  <img
+                    src={`http://localhost:5000${provider.avatar}`}
+                    alt={provider.name}
+                  />
                 </div>
                 <div className="provider-details">
                   <h2>{provider.name}</h2>
                   <p>
-                    <strong>Expertise:</strong> {provider.expertise}
+                    <strong>Expertise:</strong> {provider.experties}
                   </p>
                   <p>
                     <strong>Location:</strong> {provider.location}
                   </p>
                   <p>
-                    <strong>Rating:</strong> {provider.rating} Stars
+                    <strong>Rating:</strong>{" "}
+                    {provider.maxRating === 0 ? 1 : provider.maxRating} Stars
                   </p>
                   <p>{provider.description}</p>
                 </div>
-                <button onClick={() => viewDetails(provider.id)}>View Details</button>
+                <button onClick={() => viewDetails(provider._id)}>
+                  View Details
+                </button>
               </div>
             ))
           ) : (
             <p>No service providers found for the selected filters.</p>
           )}
+
+          {/* Pagination Controls */}
+          <div className="pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              Prev
+            </button>
+
+            <span>
+              Page {currentPage} of {totalFilteredPages}
+            </span>
+
+            <button
+              disabled={
+                currentPage === totalFilteredPages ||
+                paginatedProviders.length === 0
+              }
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              Next
+            </button>
+          </div>
         </main>
       </div>
       <Footer />
