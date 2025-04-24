@@ -222,6 +222,24 @@
   .rating-item.active {
     color: #444;
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
   
   /* Also change the circle background or border to highlight (optional) */
   .rating-item.active .rating-circle {
@@ -259,10 +277,61 @@
     .contractor-list h1 {
       text-align: center;
     }
-  
+    .contractor-card {
+      width: 350px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
     button {
       font-size: 14px;
       padding: 8px 15px;
     }
   }
   
+
+  /* ServiceProvider.css */
+
+/* Filter Icon for Small Screens */
+.filter-icon {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Filters Section */
+.filter-section {
+  width: 250px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  transition: transform 0.3s ease;
+}
+
+/* Off-canvas for Small Screens */
+@media (max-width: 768px) {
+  .filter-icon {
+    display: block; /* Show filter icon on small screens */
+  }
+
+  .filter-section {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Hide filters off-screen by default */
+    height: 100vh;
+    z-index: 999;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .filter-section.visible {
+    transform: translateX(250px); /* Slide filters into view */
+  }
+}
