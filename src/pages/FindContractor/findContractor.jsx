@@ -1,145 +1,124 @@
-import React, { useState } from 'react';
-import './findContractor.css';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "./findContractor.css";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import { useNavigate } from "react-router-dom";
+
+import { backend_url } from "../../server";
 
 const FindContractor = () => {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [allContractors, setAllContractors] = useState([]); // Store all contractors
+  const [filteredContractors, setFilteredContractors] = useState([]); // Store filtered contractors
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
-  // Use `0` to represent "no rating selected"
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedRating, setSelectedRating] = useState(0);
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
-  const contractors = [
-    {
-      id: 1,
-      name: 'Ahmed Khan',
-      company: 'Pak Builders',
-      location: 'Islamabad',
-      rating: 5,
-      description: 'Expert in residential construction. Over 15 years of experience.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 2,
-      name: 'Ali Raza',
-      company: 'Skyline Constructions',
-      location: 'Karachi',
-      rating: 4,
-      description: 'Specialist in commercial projects. Focused on quality and timelines.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 3,
-      name: 'Usman Tariq',
-      company: 'Green Homes',
-      location: 'Lahore',
-      rating: 4,
-      description: 'Known for eco-friendly designs. Sustainable housing expert.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 4,
-      name: 'Bilal Ahmed',
-      company: 'Vision Builders',
-      location: 'Rawalpindi',
-      rating: 5,
-      description: 'Modern architectural designs. Focused on innovation.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 5,
-      name: 'Hamza Iqbal',
-      company: 'Unity Constructions',
-      location: 'Faisalabad',
-      rating: 3,
-      description: 'Expert in industrial construction. Focused on efficiency.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 6,
-      name: 'Tariq Hussain',
-      company: 'Elite Builders',
-      location: 'Quetta',
-      rating: 5,
-      description: 'Luxury homes specialist. Known for premium quality work.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 7,
-      name: 'Saad Ali',
-      company: 'Prime Contractors',
-      location: 'Peshawar',
-      rating: 2,
-      description: 'Infrastructure projects expert. Focused on roads and bridges.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 8,
-      name: 'Umar Sheikh',
-      company: 'Creative Builders',
-      location: 'Hyderabad',
-      rating: 3,
-      description: 'Interior and exterior designs expert. Aesthetic-driven projects.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 9,
-      name: 'Zeeshan Ahmed',
-      company: 'Smart Constructions',
-      location: 'Multan',
-      rating: 4,
-      description: 'Pioneering AI-integrated construction. Known for innovation.',
-      image: 'https://via.placeholder.com/100',
-    },
-    {
-      id: 10,
-      name: 'Adnan Javed',
-      company: 'Reliable Builders',
-      location: 'Sialkot',
-      rating: 1,
-      description: 'Expert in commercial and residential projects.',
-      image: 'https://via.placeholder.com/100',
-    },
-  ];
+  useEffect(() => {
+    fetch(
+      `${backend_url}/contractor/getAllContractors?page=${currentPage}&limit=100`, // Fetch more items to handle frontend filtering
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setAllContractors(data.contractors);
+        setTotalPages(data.totalPages);
+      });
+  }, [currentPage]);
 
-  // Filter contractors based on:
-  // 1) searchQuery (name)
-  // 2) selectedLocation
-  // 3) selectedRating (exact match) if != 0
-  const filteredContractors = contractors.filter((contractor) => {
-    const matchesSearch = contractor.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLocation = selectedLocation === '' || contractor.location === selectedLocation;
-    const matchesRating = selectedRating === 0 || contractor.rating === selectedRating;
+  // Apply filters whenever they change
+  useEffect(() => {
+    let result = [...allContractors];
 
-    return matchesSearch && matchesLocation && matchesRating;
-  });
+    // Apply search filter
+    if (searchQuery) {
+      result = result.filter(
+        (contractor) =>
+          contractor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          contractor.company
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          contractor.description
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+      );
+    }
 
-  // Navigate to contractor detail page
+    // Apply location filter
+    if (selectedLocation) {
+      result = result.filter(
+        (contractor) => contractor.location === selectedLocation
+      );
+    }
+
+    // Apply rating filter
+    if (selectedRating > 0) {
+      result = result.filter(
+        (contractor) => Math.floor(contractor.maxRating) === selectedRating
+      );
+    }
+
+    setFilteredContractors(result);
+    // Reset to page 1 when filters change
+    setCurrentPage(1);
+  }, [allContractors, searchQuery, selectedLocation, selectedRating]);
+
+  // Pagination logic
+  const itemsPerPage = 5;
+  const totalFilteredPages = Math.ceil(
+    filteredContractors.length / itemsPerPage
+  );
+  const paginatedContractors = filteredContractors.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const viewDetails = (id) => {
     navigate(`/contractor/${id}`);
   };
 
-  // Toggle location filter
   const handleLocationClick = (location) => {
-    // If user clicks the same location again, deselect it
-    setSelectedLocation(location === selectedLocation ? '' : location);
+    setSelectedLocation(location === selectedLocation ? "" : location);
+    setCurrentPage(1);
+    setIsFiltersVisible(false);
   };
 
-  // Toggle rating filter
   const handleRatingClick = (rating) => {
-    // If user clicks the same rating again, deselect it by setting to 0
     setSelectedRating(rating === selectedRating ? 0 : rating);
+    setCurrentPage(1);
+    setIsFiltersVisible(false);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
   };
 
   return (
     <>
       <Header />
       <div className="find-contractor-page">
+        <div
+          className="filter-icon"
+          onClick={() => setIsFiltersVisible(!isFiltersVisible)}
+        >
+          <i className="fas fa-filter"></i>
+        </div>
+
         {/* Filters Section */}
-        <aside className="filter-section">
+        <aside
+          className={`filter-section ${isFiltersVisible ? "visible" : ""}`}
+        >
           <h3>Filters</h3>
 
           {/* Location Filter */}
@@ -147,20 +126,22 @@ const FindContractor = () => {
             <h4>Location</h4>
             <ul>
               {[
-                'Islamabad',
-                'Karachi',
-                'Lahore',
-                'Rawalpindi',
-                'Faisalabad',
-                'Quetta',
-                'Peshawar',
-                'Hyderabad',
-                'Multan',
-                'Sialkot',
+                "Islamabad",
+                "Karachi",
+                "Lahore",
+                "Rawalpindi",
+                "Faisalabad",
+                "Quetta",
+                "Peshawar",
+                "Hyderabad",
+                "Multan",
+                "Sialkot",
               ].map((location) => (
                 <li
                   key={location}
-                  className={selectedLocation === location ? 'active-filter' : ''}
+                  className={
+                    selectedLocation === location ? "active-filter" : ""
+                  }
                   onClick={() => handleLocationClick(location)}
                 >
                   {location}
@@ -169,20 +150,22 @@ const FindContractor = () => {
             </ul>
           </div>
 
-          {/* Rating Filter (Toggle on/off for exact rating) */}
+          {/* Rating Filter */}
           <div className="filter-group">
             <h4>Rating</h4>
             <div className="rating-filter">
               {[5, 4, 3, 2, 1].map((rating) => (
                 <div
                   key={rating}
-                  className={`rating-item ${selectedRating === rating ? 'active' : ''}`}
+                  className={`rating-item ${
+                    selectedRating === rating ? "active" : ""
+                  }`}
                   onClick={() => handleRatingClick(rating)}
                 >
                   <span className="rating-circle">{rating}</span>
                   <span className="rating-stars">
-                    {'★'.repeat(rating)}
-                    {'☆'.repeat(5 - rating)}
+                    {"★".repeat(rating)}
+                    {"☆".repeat(5 - rating)}
                   </span>
                 </div>
               ))}
@@ -200,7 +183,7 @@ const FindContractor = () => {
               type="text"
               placeholder="Search contractor..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchChange(e)}
             />
             <button>
               <i className="fas fa-search"></i>
@@ -208,11 +191,14 @@ const FindContractor = () => {
           </div>
 
           {/* Contractor Cards */}
-          {filteredContractors.length > 0 ? (
-            filteredContractors.map((contractor) => (
-              <div key={contractor.id} className="contractor-card">
+          {paginatedContractors.length > 0 ? (
+            paginatedContractors.map((contractor) => (
+              <div key={contractor._id} className="provider-card">
                 <div className="contractor-picture">
-                  <img src={contractor.image} alt={contractor.name} />
+                  <img
+                    src={`http://localhost:5000${contractor.avatar}`}
+                    alt={contractor.name}
+                  />
                 </div>
                 <div className="contractor-details">
                   <h2>{contractor.name}</h2>
@@ -223,16 +209,43 @@ const FindContractor = () => {
                     <strong>Location:</strong> {contractor.location}
                   </p>
                   <p>
-                    <strong>Rating:</strong> {contractor.rating} Stars
+                    <strong>Rating:</strong>{" "}
+                    {contractor.maxRating === 0 ? 1 : contractor.maxRating}{" "}
+                    Stars
                   </p>
                   <p>{contractor.description}</p>
                 </div>
-                <button onClick={() => viewDetails(contractor.id)}>View Details</button>
+                <button onClick={() => viewDetails(contractor._id)}>
+                  View Details
+                </button>
               </div>
             ))
           ) : (
             <p>No contractors found for the selected filters.</p>
           )}
+
+          <div className="pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              Prev
+            </button>
+
+            <span>
+              Page {currentPage} of {totalFilteredPages}
+            </span>
+
+            <button
+              disabled={
+                currentPage === totalFilteredPages ||
+                paginatedContractors.length === 0
+              }
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              Next
+            </button>
+          </div>
         </main>
       </div>
       <Footer />
