@@ -1,0 +1,269 @@
+.messenger {
+  height: calc(100vh - 70px);
+  display: flex;
+}
+
+.chatMenu {
+  flex: 2;
+}
+
+.chatMenuInput {
+  width: 90%;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+.chatBox {
+  flex: 5.5;
+}
+
+.typingIndicator {
+  font-style: italic;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.chatBoxWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.chatBoxTop {
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+.chatBoxBottom {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatMessageInput {
+  width: 80%;
+  height: 90px;
+  padding: 10px;
+}
+
+.chatSubmitButton {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: teal;
+  color: white;
+}
+
+.chatOnline {
+  flex: 3;
+}
+
+.chatMenuWrapper,
+.chatBoxWrapper,
+.chatOnlineWrapper {
+  padding: 10px;
+  height: 100%;
+}
+
+.noConversationText {
+  position: absolute;
+  top: 10%;
+  font-size: 50px;
+  color: rgb(224, 220, 220);
+  cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+  .chatMenu {
+    flex: 1;
+  }
+
+  .chatMenuInput {
+    display: none;
+  }
+
+  .chatBox {
+    flex: 10;
+  }
+
+  .chatOnline {
+    flex: 1px;
+  }
+}
+
+.chatBoxBottom {
+  position: relative;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chatMessageInput {
+  width: 100%;
+  padding: 12px 60px 12px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.chatMessageInput:focus {
+  border-color: #007bff;
+}
+
+.chatSubmitButton {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chatSubmitButton:hover {
+  background-color: #0056b3;
+}
+
+.chatSubmitButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.selectedConversation,
+.selectedChannel {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.conversationsSection,
+.channelsSection {
+  margin-bottom: 20px;
+}
+
+.channel {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.channelAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.channelName {
+  font-size: 14px;
+}
+.chatBoxBottom {
+  position: relative;
+  padding: 10px;
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatInputContainer {
+  width: 100%;
+  /* max-width: 800px; Adjust based on your layout */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chatMessageInput {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  background-color: transparent;
+  line-height: 1.5;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.chatMessageInput:focus {
+  border-color: #007bff;
+}
+
+.chatSubmitButton {
+  background-color: transparent;
+  border: 1px solid gainsboro;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.chatSubmitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: transparent;
+
+}
+
+.sendIcon {
+  color: #007bff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.chatSubmitButton:hover .sendIcon {
+  color: #0056b3;
+}
+
+.sendOfferButton {
+  margin-right: 50px;
+  border: 1px solid gainsboro;
+  background-color: transparent;
+  color: black;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+}
+
+.offerIcon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.sendOfferButton:hover {
+ color: #45a049;
+ background-color: rgb(206, 204, 204);
+
+}
